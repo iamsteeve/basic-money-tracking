@@ -1,0 +1,22 @@
+{
+    "name": "steeve/money-tracking",
+    "description": "Sistema de registro de gastos",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Steeve Luis Angel Torres Agustin",
+            "email": "iam@steeve.me"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\":"App",
+            "Core\\": "Core"
+        }
+    },
+    "require": {
+        "propel/propel": "~2.0@dev",
+        "league/plates": "^3.3",
+        "josantonius/session": "^1.1"
+    }
+}
