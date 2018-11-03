@@ -129,7 +129,7 @@ class CategoryTableMap extends TableMap
         $this->setIdentifierQuoting(false);
         $this->setClassName('\\App\\Models\\Category');
         $this->setPackage('App.Models');
-        $this->setUseIdGenerator(false);
+        $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('name', 'Name', 'VARCHAR', false, 60, null);
@@ -392,6 +392,10 @@ class CategoryTableMap extends TableMap
             $criteria = clone $criteria; // rename for clarity
         } else {
             $criteria = $criteria->buildCriteria(); // build Criteria from Category object
+        }
+
+        if ($criteria->containsKey(CategoryTableMap::COL_ID) && $criteria->keyContainsValue(CategoryTableMap::COL_ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.CategoryTableMap::COL_ID.')');
         }
 
 

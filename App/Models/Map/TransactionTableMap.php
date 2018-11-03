@@ -149,7 +149,7 @@ class TransactionTableMap extends TableMap
         $this->setIdentifierQuoting(false);
         $this->setClassName('\\App\\Models\\Transaction');
         $this->setPackage('App.Models');
-        $this->setUseIdGenerator(false);
+        $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('id', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('account_id', 'AccountId', 'INTEGER', 'account', 'id', true, null, null);
@@ -431,6 +431,10 @@ class TransactionTableMap extends TableMap
             $criteria = clone $criteria; // rename for clarity
         } else {
             $criteria = $criteria->buildCriteria(); // build Criteria from Transaction object
+        }
+
+        if ($criteria->containsKey(TransactionTableMap::COL_ID) && $criteria->keyContainsValue(TransactionTableMap::COL_ID) ) {
+            throw new PropelException('Cannot insert a value for auto-increment primary key ('.TransactionTableMap::COL_ID.')');
         }
 
 

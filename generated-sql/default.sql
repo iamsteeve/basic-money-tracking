@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS `account`;
 
 CREATE TABLE `account`
 (
-    `id` INTEGER NOT NULL,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER NOT NULL,
     `name` VARCHAR(60),
     PRIMARY KEY (`id`),
@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `category`;
 
 CREATE TABLE `category`
 (
-    `id` INTEGER NOT NULL,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(60),
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS `transaction`;
 
 CREATE TABLE `transaction`
 (
-    `id` INTEGER NOT NULL,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `account_id` INTEGER NOT NULL,
     `category_id` INTEGER NOT NULL,
     `description` TEXT,
@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user`
 (
-    `id` INTEGER NOT NULL,
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(255) NOT NULL,
     `displayName` VARCHAR(255),
     `password` VARCHAR(255) NOT NULL,
