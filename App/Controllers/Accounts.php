@@ -3,9 +3,11 @@
 namespace App\Controllers;
 
 
+use App\Models\Account;
 use App\Models\AccountQuery;
 use Core\Controller;
 use Core\View;
+use Josantonius\Session\Session;
 use Propel\Runtime\Exception\PropelException;
 
 class Accounts extends Controller
@@ -20,34 +22,71 @@ class Accounts extends Controller
     {
         try {
             $accounts = AccountQuery::create()->find();
-            echo $accounts->toJSON();
-        } catch (PropelException $propelException) {
-            echo $propelException->getMessage();
+            View::setData("accounts", $accounts);
+            View::setData("title", "Mira tus Cuentas");
+            View::sendActionSessionToView();
+            View::render("index");
+        } catch (\Exception $exception) {
+            echo $exception->getMessage();
         }
-        View::setData("title", "Mira tus Cuentas");
-        View::sendSessionToView();
-        View::render("index");
+
     }
 
     public function add(): void
     {
+        if ($_POST) {
 
-        echo "<h1>Add</h1>";
+            try {
+                $account = new Account();
+                $account->setName($_POST["name"]);
+                $account->setUserId(2);
+                $account->save();
+                Session::set('action','Cuenta agregada');
+                $this->redirect(array("controller" => "accounts"));
+                exit();
+
+            } catch (PropelException $e) {
+                echo $e->getMessage();
+            }
+        }
+        if ($_GET) {
+            View::sendActionSessionToView();
+            View::setData("title", "Agrega una Cuenta");
+            View::render("add");
+        }
     }
     public function update($id): void
     {
         try {
             $account = AccountQuery::create()->findPk($id);
-        } catch (PropelException $propelException){
+            if ($_GET) {
+                View::setData("account", $account);
+                View::sendActionSessionToView();
+                View::setData("title", "Actualiza la cuenta");
+                View::render("update");
+            }
+            if ($_POST) {
+
+                $account->setName($_POST["name"]);
+                $account->save();
+                Session::set('action', 'Cuenta Actualizada');
+                $this->redirect(array("controller" => "accounts"));
+                exit();
+            }
+        } catch (PropelException $propelException) {
             echo $propelException->getMessage();
         }
+
+
     }
 
-    public function remove($id): void
+    public function delete($id): void
     {
         try {
             $account = AccountQuery::create()->findPk($id);
             $account->delete();
+            $this->redirect(array("controller"=> "accounts"));
+            exit();
         } catch (PropelException $propelException){
             echo $propelException->getMessage();
         }
