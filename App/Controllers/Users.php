@@ -3,7 +3,10 @@
 namespace App\Controllers;
 
 
+use App\Models\User;
+use App\Models\UserQuery;
 use Core\Controller;
+use Propel\Runtime\Exception\PropelException;
 
 class Users extends Controller
 {
@@ -14,20 +17,34 @@ class Users extends Controller
 
     public function index(): void
     {
-        echo "<h1>Users</h1>";
+        try {
+            $users = UserQuery::create()->find();
+            echo $users->toJSON();
+        } catch (PropelException $propelException) {
+            echo $propelException->getMessage();
+        }
     }
 
     public function add(): void
     {
-        echo "<h1>Add</h1>";
+
     }
-    public function update(): void
+    public function update($id): void
     {
-        echo "<h1>Update</h1>";
+        try {
+            $user = UserQuery::create()->findPk($id);
+        } catch (PropelException $propelException) {
+            echo  $propelException->getMessage();
+        }
     }
 
-    public function remove(): void
+    public function remove($id): void
     {
-        echo "<h1>Remove</h1>";
+        try {
+            $user = UserQuery::create()->findPk($id);
+            $user->delete();
+        } catch (PropelException $propelException) {
+            echo  $propelException->getMessage();
+        }
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 
+use App\Models\TransactionQuery;
 use Core\Controller;
+use Propel\Runtime\Exception\PropelException;
 
 class Transactions extends Controller
 {
@@ -14,21 +16,35 @@ class Transactions extends Controller
 
     public function index(): void
     {
-        echo "<h1>Transactions</h1>";
+        try{
+            $transactions = TransactionQuery::create()->find();
+            echo $transactions->toJSON();
+        } catch (PropelException $propelException){
+            echo $propelException->getMessage();
+        }
     }
 
     public function add(): void
     {
         echo "<h1>Add</h1>";
     }
-    public function update(): void
+    public function update($id): void
     {
-        echo "<h1>Update</h1>";
+        try {
+            $transaction = TransactionQuery::create()->findPk($id);
+        } catch (PropelException $propelException) {
+            echo $propelException->getMessage();
+        }
     }
 
-    public function remove(): void
+    public function remove($id): void
     {
-        echo "<h1>Remove</h1>";
+        try {
+            $transaction = TransactionQuery::create()->findPk($id);
+            $transaction->delete();
+        } catch (PropelException $propelException) {
+            echo $propelException->getMessage();
+        }
     }
 
 }

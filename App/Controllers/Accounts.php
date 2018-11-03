@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 
+use App\Models\AccountQuery;
 use Core\Controller;
 use Core\View;
+use Propel\Runtime\Exception\PropelException;
 
 class Accounts extends Controller
 {
@@ -16,6 +18,12 @@ class Accounts extends Controller
 
     public function index(): void
     {
+        try {
+            $accounts = AccountQuery::create()->find();
+            echo $accounts->toJSON();
+        } catch (PropelException $propelException) {
+            echo $propelException->getMessage();
+        }
         View::setData("title", "Mira tus Cuentas");
         View::sendSessionToView();
         View::render("index");
@@ -23,15 +31,25 @@ class Accounts extends Controller
 
     public function add(): void
     {
+
         echo "<h1>Add</h1>";
     }
-    public function update(): void
+    public function update($id): void
     {
-        echo "<h1>Update</h1>";
+        try {
+            $account = AccountQuery::create()->findPk($id);
+        } catch (PropelException $propelException){
+            echo $propelException->getMessage();
+        }
     }
 
-    public function remove(): void
+    public function remove($id): void
     {
-        echo "<h1>Remove</h1>";
+        try {
+            $account = AccountQuery::create()->findPk($id);
+            $account->delete();
+        } catch (PropelException $propelException){
+            echo $propelException->getMessage();
+        }
     }
 }
