@@ -53,7 +53,6 @@ class Request
         return $this->_controller;
     }
 
-
     public function getMethod(): string
     {
         return $this->_method;

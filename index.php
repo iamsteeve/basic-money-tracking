@@ -26,5 +26,5 @@ require __DIR__ . '/generated-conf/config.php';
 try {
     \Core\App::run(new \Core\Request());
 } catch (Exception $exception) {
-    echo $exception->getMessage();
+    echo \Core\View::renderErrorController("Error", $exception->getMessage());
 }

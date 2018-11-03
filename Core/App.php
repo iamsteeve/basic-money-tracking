@@ -13,7 +13,6 @@ class App
 
     const DIRECTORY_CONTROLLERS = ROOT."App".DS."Controllers".DS;
 
-
     public static function run(Request $request){
         Session::init();
         $pathController = self::DIRECTORY_CONTROLLERS. ucfirst($request->getController()). ".php";
@@ -35,7 +34,7 @@ class App
                 call_user_func(array($controller, $method));
             }
         } else {
-            throw new \Exception("Controller not found");
+            throw new \Exception("Página no encontrada");
         }
 
 
