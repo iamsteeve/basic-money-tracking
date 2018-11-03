@@ -47,7 +47,7 @@ class View
         self::$_templates->loadExtension($extension);
     }
 
-    static public function sendSessionToView(): void
+    static public function sendActionSessionToView(): void
     {
         if (Session::get('action')){
             self::$_templates->addData(['action'=>Session::get('action')],'layouts::base');
