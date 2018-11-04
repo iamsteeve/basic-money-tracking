@@ -33,6 +33,16 @@ abstract class Controller
         $this->redirect(array("controller"=>"home", "action"=>"login"));
         exit();
     }
+    public function toMain(){
+
+        $this->redirect(array("controller" => $this->request->getController()));
+        exit();
+    }
+    public function toDefaultController(){
+        $this->redirect(array("controller"=> DEFAULT_CONTROLLER));
+        exit();
+    }
+
 
     public abstract function index():void;
 }
