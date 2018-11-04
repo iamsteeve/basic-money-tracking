@@ -26,7 +26,7 @@ class Categories extends Controller
         if(Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             try {
                 $categories = CategoryQuery::create()
-                    ->filterByUserId(Session::get("userId"))
+                    ->filterByUserId(Authentication::getUserId())
                     ->find();
                 View::sendActionSessionToView();
                 View::setData("title", "Mira todas las Categorías");

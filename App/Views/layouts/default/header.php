@@ -23,6 +23,9 @@
 
     <ul class="sidenav" id="mobile-demo">
         <?php if($isLogged): ?>
+            <li>
+                <p class="flow-text" style="padding-left: 20px;">Bienvenido <?= $userName? $userName: $email ?></p>
+            </li>
             <li><a href="<?php echo APP_URL?>accounts">Cuentas</a></li>
             <li><a href="<?php echo APP_URL?>categories">Categorías</a></li>
             <li><a href="<?php echo APP_URL?>transactions">Transactions</a></li>

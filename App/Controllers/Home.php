@@ -47,7 +47,7 @@ class Home extends Controller
                 ->filterByEmail(Sanatize::isEmail($_POST['email']))
                 ->filterByPassword($_POST['password'])
                 ->findOne();
-            if ($user && Authentication::signIn($user->getDisplayname(),$user->getId(),$user->getRol())){
+            if ($user && Authentication::signIn($user->getDisplayname(),$user->getId(),$user->getRol(), $user->getEmail())){
                 Session::set("action", "¡Se iniciado sesión!");
                 $this->toDefaultController();
             } else {
@@ -89,7 +89,6 @@ class Home extends Controller
                         exit();
                     } else {
                         try {
-
                             $newUser = new User();
                             $newUser->setId(null);
                             $newUser->setPassword($_POST['password']);
@@ -98,7 +97,7 @@ class Home extends Controller
                             $newUser->setRol('user');
                             $newUser->setName(Sanatize::sanitizeText($_POST['name']));
                             $newUser->save();
-                            if (Authentication::signIn($newUser->getDisplayname() ? $newUser->getDisplayname() : $newUser->getEmail(), $newUser->getId(), $newUser->getRol())) {
+                            if (Authentication::signIn($newUser->getDisplayname() ? $newUser->getDisplayname() : $newUser->getEmail(), $newUser->getId(), $newUser->getRol(), $newUser->getEmail())) {
                                 Session::set('action', 'Se ha iniciado sesión con éxito');
                                 $this->toDefaultController();
                             } else {

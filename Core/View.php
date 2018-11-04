@@ -64,6 +64,9 @@ class View
         }
 
         self::$_templates->addData(['isLogged' => Authentication::isLogged()], 'layouts::header');
+        self::$_templates->addData(['userId' => Authentication::getUserId()], 'layouts::header');
+        self::$_templates->addData(['userName' => Authentication::getUserName()], 'layouts::header');
+        self::$_templates->addData(['email' => Authentication::getEmail()], 'layouts::header');
 
     }
 

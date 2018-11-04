@@ -26,7 +26,7 @@ class Accounts extends Controller
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             try {
                 $accounts = AccountQuery::create()
-                    ->filterById(Session::get('userId'))
+                    ->filterByUserId(Authentication::getUserId())
                     ->find();
                 View::setData("accounts", $accounts);
                 View::setData("title", "Mira tus Cuentas");

@@ -89,8 +89,12 @@ class Transactions extends Controller
                 }
             }
             if ($_GET) {
-                $categories = CategoryQuery::create()->find();
-                $accounts = AccountQuery::create()->find();
+                $categories = CategoryQuery::create()
+                    ->filterByUserId(Authentication::getUserId())
+                    ->find();
+                $accounts = AccountQuery::create()
+                    ->filterByUserId(Authentication::getUserId())
+                    ->find();
                 View::sendActionSessionToView();
                 View::setData("title", "Crea una nueva transacción");
                 View::setData("categories", $categories);
@@ -107,8 +111,12 @@ class Transactions extends Controller
             try {
                 $transaction = TransactionQuery::create()->findPk($id);
                 if ($_GET){
-                    $categories = CategoryQuery::create()->find();
-                    $accounts = AccountQuery::create()->find();
+                    $categories = CategoryQuery::create()
+                        ->filterByUserId(Authentication::getUserId())
+                        ->find();
+                    $accounts = AccountQuery::create()
+                        ->filterByUserId(Authentication::getUserId())
+                        ->find();
                     View::sendActionSessionToView();
 
                     View::setData("title", "Actualiza la transacción");
