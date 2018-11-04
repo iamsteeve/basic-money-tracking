@@ -13,7 +13,7 @@ define("APP_FOLDER", "money-tracking");
 /**
  * Controlador por default
  */
-define("DEFAULT_CONTROLLER", "users");
+define("DEFAULT_CONTROLLER", "transactions");
 
 /**
  * Layout Por default
