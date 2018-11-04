@@ -40,6 +40,7 @@ class Users extends Controller
                 $user->setDisplayname($_POST["displayname"]);
                 $user->setEmail($_POST["email"]);
                 $user->setPassword($_POST["password"]);
+                $user->setRol($_POST["rol"]);
                 $user->save();
                 Session::set('action', 'Usuario agregado');
                 $this->redirect(array("controller" => "users"));
@@ -73,7 +74,7 @@ class Users extends Controller
                 $user->setDisplayname($_POST["displayname"]);
                 $user->setEmail($_POST["email"]);
                 $user->setPassword($_POST["password"]);
-                $user->setName($_POST["name"]);
+                $user->setRol($_POST["rol"]);
                 $user->save();
                 Session::set('action', 'Usuario actualizado');
                 $this->redirect(array("controller" => "users"));
