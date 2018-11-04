@@ -25,12 +25,14 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUserQuery orderByDisplayname($order = Criteria::ASC) Order by the displayName column
  * @method     ChildUserQuery orderByPassword($order = Criteria::ASC) Order by the password column
  * @method     ChildUserQuery orderByEmail($order = Criteria::ASC) Order by the email column
+ * @method     ChildUserQuery orderByRol($order = Criteria::ASC) Order by the rol column
  *
  * @method     ChildUserQuery groupById() Group by the id column
  * @method     ChildUserQuery groupByName() Group by the name column
  * @method     ChildUserQuery groupByDisplayname() Group by the displayName column
  * @method     ChildUserQuery groupByPassword() Group by the password column
  * @method     ChildUserQuery groupByEmail() Group by the email column
+ * @method     ChildUserQuery groupByRol() Group by the rol column
  *
  * @method     ChildUserQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildUserQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -69,7 +71,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUser findOneByName(string $name) Return the first ChildUser filtered by the name column
  * @method     ChildUser findOneByDisplayname(string $displayName) Return the first ChildUser filtered by the displayName column
  * @method     ChildUser findOneByPassword(string $password) Return the first ChildUser filtered by the password column
- * @method     ChildUser findOneByEmail(string $email) Return the first ChildUser filtered by the email column *
+ * @method     ChildUser findOneByEmail(string $email) Return the first ChildUser filtered by the email column
+ * @method     ChildUser findOneByRol(string $rol) Return the first ChildUser filtered by the rol column *
 
  * @method     ChildUser requirePk($key, ConnectionInterface $con = null) Return the ChildUser by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUser requireOne(ConnectionInterface $con = null) Return the first ChildUser matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -79,6 +82,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUser requireOneByDisplayname(string $displayName) Return the first ChildUser filtered by the displayName column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUser requireOneByPassword(string $password) Return the first ChildUser filtered by the password column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildUser requireOneByEmail(string $email) Return the first ChildUser filtered by the email column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildUser requireOneByRol(string $rol) Return the first ChildUser filtered by the rol column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildUser[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildUser objects based on current ModelCriteria
  * @method     ChildUser[]|ObjectCollection findById(int $id) Return ChildUser objects filtered by the id column
@@ -86,6 +90,7 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildUser[]|ObjectCollection findByDisplayname(string $displayName) Return ChildUser objects filtered by the displayName column
  * @method     ChildUser[]|ObjectCollection findByPassword(string $password) Return ChildUser objects filtered by the password column
  * @method     ChildUser[]|ObjectCollection findByEmail(string $email) Return ChildUser objects filtered by the email column
+ * @method     ChildUser[]|ObjectCollection findByRol(string $rol) Return ChildUser objects filtered by the rol column
  * @method     ChildUser[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -184,7 +189,7 @@ abstract class UserQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, name, displayName, password, email FROM user WHERE id = :p0';
+        $sql = 'SELECT id, name, displayName, password, email, rol FROM user WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -413,6 +418,31 @@ abstract class UserQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(UserTableMap::COL_EMAIL, $email, $comparison);
+    }
+
+    /**
+     * Filter the query on the rol column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByRol('fooValue');   // WHERE rol = 'fooValue'
+     * $query->filterByRol('%fooValue%', Criteria::LIKE); // WHERE rol LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $rol The value to use as filter.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildUserQuery The current query, for fluid interface
+     */
+    public function filterByRol($rol = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($rol)) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(UserTableMap::COL_ROL, $rol, $comparison);
     }
 
     /**

@@ -59,7 +59,7 @@ class UserTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 5;
+    const NUM_COLUMNS = 6;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class UserTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 5;
+    const NUM_HYDRATE_COLUMNS = 6;
 
     /**
      * the column name for the id field
@@ -97,6 +97,11 @@ class UserTableMap extends TableMap
     const COL_EMAIL = 'user.email';
 
     /**
+     * the column name for the rol field
+     */
+    const COL_ROL = 'user.rol';
+
+    /**
      * The default string format for model objects of the related table
      */
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -108,11 +113,11 @@ class UserTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'Name', 'Displayname', 'Password', 'Email', ),
-        self::TYPE_CAMELNAME     => array('id', 'name', 'displayname', 'password', 'email', ),
-        self::TYPE_COLNAME       => array(UserTableMap::COL_ID, UserTableMap::COL_NAME, UserTableMap::COL_DISPLAYNAME, UserTableMap::COL_PASSWORD, UserTableMap::COL_EMAIL, ),
-        self::TYPE_FIELDNAME     => array('id', 'name', 'displayName', 'password', 'email', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, )
+        self::TYPE_PHPNAME       => array('Id', 'Name', 'Displayname', 'Password', 'Email', 'Rol', ),
+        self::TYPE_CAMELNAME     => array('id', 'name', 'displayname', 'password', 'email', 'rol', ),
+        self::TYPE_COLNAME       => array(UserTableMap::COL_ID, UserTableMap::COL_NAME, UserTableMap::COL_DISPLAYNAME, UserTableMap::COL_PASSWORD, UserTableMap::COL_EMAIL, UserTableMap::COL_ROL, ),
+        self::TYPE_FIELDNAME     => array('id', 'name', 'displayName', 'password', 'email', 'rol', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
     );
 
     /**
@@ -122,11 +127,11 @@ class UserTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'Name' => 1, 'Displayname' => 2, 'Password' => 3, 'Email' => 4, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'name' => 1, 'displayname' => 2, 'password' => 3, 'email' => 4, ),
-        self::TYPE_COLNAME       => array(UserTableMap::COL_ID => 0, UserTableMap::COL_NAME => 1, UserTableMap::COL_DISPLAYNAME => 2, UserTableMap::COL_PASSWORD => 3, UserTableMap::COL_EMAIL => 4, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'name' => 1, 'displayName' => 2, 'password' => 3, 'email' => 4, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'Name' => 1, 'Displayname' => 2, 'Password' => 3, 'Email' => 4, 'Rol' => 5, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'name' => 1, 'displayname' => 2, 'password' => 3, 'email' => 4, 'rol' => 5, ),
+        self::TYPE_COLNAME       => array(UserTableMap::COL_ID => 0, UserTableMap::COL_NAME => 1, UserTableMap::COL_DISPLAYNAME => 2, UserTableMap::COL_PASSWORD => 3, UserTableMap::COL_EMAIL => 4, UserTableMap::COL_ROL => 5, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'name' => 1, 'displayName' => 2, 'password' => 3, 'email' => 4, 'rol' => 5, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, )
     );
 
     /**
@@ -151,6 +156,7 @@ class UserTableMap extends TableMap
         $this->addColumn('displayName', 'Displayname', 'VARCHAR', false, 255, null);
         $this->addColumn('password', 'Password', 'VARCHAR', true, 255, null);
         $this->addColumn('email', 'Email', 'VARCHAR', true, 255, null);
+        $this->addColumn('rol', 'Rol', 'VARCHAR', true, 20, 'user');
     } // initialize()
 
     /**
@@ -320,12 +326,14 @@ class UserTableMap extends TableMap
             $criteria->addSelectColumn(UserTableMap::COL_DISPLAYNAME);
             $criteria->addSelectColumn(UserTableMap::COL_PASSWORD);
             $criteria->addSelectColumn(UserTableMap::COL_EMAIL);
+            $criteria->addSelectColumn(UserTableMap::COL_ROL);
         } else {
             $criteria->addSelectColumn($alias . '.id');
             $criteria->addSelectColumn($alias . '.name');
             $criteria->addSelectColumn($alias . '.displayName');
             $criteria->addSelectColumn($alias . '.password');
             $criteria->addSelectColumn($alias . '.email');
+            $criteria->addSelectColumn($alias . '.rol');
         }
     }
 

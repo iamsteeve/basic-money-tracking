@@ -103,6 +103,14 @@ abstract class User implements ActiveRecordInterface
     protected $email;
 
     /**
+     * The value for the rol field.
+     *
+     * Note: this column has a database default value of: 'user'
+     * @var        string
+     */
+    protected $rol;
+
+    /**
      * @var        ObjectCollection|ChildAccount[] Collection to store aggregation of ChildAccount objects.
      */
     protected $collAccounts;
@@ -135,10 +143,23 @@ abstract class User implements ActiveRecordInterface
     protected $categoriesScheduledForDeletion = null;
 
     /**
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see __construct()
+     */
+    public function applyDefaultValues()
+    {
+        $this->rol = 'user';
+    }
+
+    /**
      * Initializes internal state of App\Models\Base\User object.
+     * @see applyDefaults()
      */
     public function __construct()
     {
+        $this->applyDefaultValues();
     }
 
     /**
@@ -410,6 +431,16 @@ abstract class User implements ActiveRecordInterface
     }
 
     /**
+     * Get the [rol] column value.
+     *
+     * @return string
+     */
+    public function getRol()
+    {
+        return $this->rol;
+    }
+
+    /**
      * Set the value of [id] column.
      *
      * @param int $v new value
@@ -510,6 +541,26 @@ abstract class User implements ActiveRecordInterface
     } // setEmail()
 
     /**
+     * Set the value of [rol] column.
+     *
+     * @param string $v new value
+     * @return $this|\App\Models\User The current object (for fluent API support)
+     */
+    public function setRol($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->rol !== $v) {
+            $this->rol = $v;
+            $this->modifiedColumns[UserTableMap::COL_ROL] = true;
+        }
+
+        return $this;
+    } // setRol()
+
+    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -519,6 +570,10 @@ abstract class User implements ActiveRecordInterface
      */
     public function hasOnlyDefaultValues()
     {
+            if ($this->rol !== 'user') {
+                return false;
+            }
+
         // otherwise, everything was equal, so return TRUE
         return true;
     } // hasOnlyDefaultValues()
@@ -559,6 +614,9 @@ abstract class User implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : UserTableMap::translateFieldName('Email', TableMap::TYPE_PHPNAME, $indexType)];
             $this->email = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : UserTableMap::translateFieldName('Rol', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->rol = (null !== $col) ? (string) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -567,7 +625,7 @@ abstract class User implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 5; // 5 = UserTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 6; // 6 = UserTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\App\\Models\\User'), 0, $e);
@@ -821,6 +879,9 @@ abstract class User implements ActiveRecordInterface
         if ($this->isColumnModified(UserTableMap::COL_EMAIL)) {
             $modifiedColumns[':p' . $index++]  = 'email';
         }
+        if ($this->isColumnModified(UserTableMap::COL_ROL)) {
+            $modifiedColumns[':p' . $index++]  = 'rol';
+        }
 
         $sql = sprintf(
             'INSERT INTO user (%s) VALUES (%s)',
@@ -846,6 +907,9 @@ abstract class User implements ActiveRecordInterface
                         break;
                     case 'email':
                         $stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
+                        break;
+                    case 'rol':
+                        $stmt->bindValue($identifier, $this->rol, PDO::PARAM_STR);
                         break;
                 }
             }
@@ -924,6 +988,9 @@ abstract class User implements ActiveRecordInterface
             case 4:
                 return $this->getEmail();
                 break;
+            case 5:
+                return $this->getRol();
+                break;
             default:
                 return null;
                 break;
@@ -959,6 +1026,7 @@ abstract class User implements ActiveRecordInterface
             $keys[2] => $this->getDisplayname(),
             $keys[3] => $this->getPassword(),
             $keys[4] => $this->getEmail(),
+            $keys[5] => $this->getRol(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1045,6 +1113,9 @@ abstract class User implements ActiveRecordInterface
             case 4:
                 $this->setEmail($value);
                 break;
+            case 5:
+                $this->setRol($value);
+                break;
         } // switch()
 
         return $this;
@@ -1085,6 +1156,9 @@ abstract class User implements ActiveRecordInterface
         }
         if (array_key_exists($keys[4], $arr)) {
             $this->setEmail($arr[$keys[4]]);
+        }
+        if (array_key_exists($keys[5], $arr)) {
+            $this->setRol($arr[$keys[5]]);
         }
     }
 
@@ -1141,6 +1215,9 @@ abstract class User implements ActiveRecordInterface
         }
         if ($this->isColumnModified(UserTableMap::COL_EMAIL)) {
             $criteria->add(UserTableMap::COL_EMAIL, $this->email);
+        }
+        if ($this->isColumnModified(UserTableMap::COL_ROL)) {
+            $criteria->add(UserTableMap::COL_ROL, $this->rol);
         }
 
         return $criteria;
@@ -1232,6 +1309,7 @@ abstract class User implements ActiveRecordInterface
         $copyObj->setDisplayname($this->getDisplayname());
         $copyObj->setPassword($this->getPassword());
         $copyObj->setEmail($this->getEmail());
+        $copyObj->setRol($this->getRol());
 
         if ($deepCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1763,8 +1841,10 @@ abstract class User implements ActiveRecordInterface
         $this->displayname = null;
         $this->password = null;
         $this->email = null;
+        $this->rol = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);
