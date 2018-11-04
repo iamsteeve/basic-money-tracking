@@ -17,14 +17,14 @@ class Authentication
 
     public static function signIn(string $userName, int $userId , string $rol, int $lifetime = 0 ): bool {
         try {
-            return Session::set("userName", $userName) && Session::set("userId", $userId) && Session::set("rol", $rol) && Session::set("logged", true) ? true : false;
+            return Session::set("userName", $userName) && Session::set("userId", $userId) && Session::set("role", $rol) && Session::set("logged", true) ? true : false;
         }catch (\Exception $exception){
             return false;
         }
     }
     public static function logOut(): bool {
         try {
-            return Session::set("userName", null)&& Session::set("userId", null) && Session::set("rol", null) && Session::set("logged", false) ? true : false;
+            return Session::set("userName", null)&& Session::set("userId", null) && Session::set("role", null) && Session::set("logged", false) ? true : false;
         } catch (\Exception $exception) {
             return false;
         }

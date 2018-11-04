@@ -6,10 +6,12 @@ namespace App\Controllers;
 use App\Models\Account;
 use App\Models\AccountQuery;
 use App\Services\Authentication;
+use App\Services\Sanatize;
 use Core\Controller;
 use Core\View;
 use Josantonius\Session\Session;
 use Propel\Runtime\Exception\PropelException;
+use Valitron\Validator;
 
 class Accounts extends Controller
 {
@@ -21,7 +23,7 @@ class Accounts extends Controller
 
     public function index(): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             try {
                 $accounts = AccountQuery::create()
                     ->filterById(Session::get('userId'))
@@ -41,20 +43,27 @@ class Accounts extends Controller
 
     public function add(): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             if ($_POST) {
+                $v = new Validator($_POST);
+                $v->rule('required', ['name']);
+                if($v->validate()) {
+                    try {
+                        $account = new Account();
+                        $account->setName(Sanatize::sanitizeText($_POST['name']));
+                        $account->setUserId(Session::get("userId"));
+                        $account->save();
+                        Session::set('action','Cuenta agregada');
+                        $this->toMain();
 
-                try {
-                    $account = new Account();
-                    $account->setName($_POST["name"]);
-                    $account->setUserId(Session::get("userId"));
-                    $account->save();
-                    Session::set('action','Cuenta agregada');
-                    $this->toMain();
-
-                } catch (PropelException $e) {
-                    Session::set("action","No se ha podido agregar el registro");
-                    $this->toMain();
+                    } catch (PropelException $e) {
+                        Session::set("action","No se ha podido agregar el registro");
+                        $this->toMain();
+                    }
+                } else {
+                    Session::set("action", "El nombre es requerido");
+                    $this->redirect(array("controller"=>"accounts", "action" => "add"));
+                    exit();
                 }
             }
             if ($_GET) {
@@ -68,7 +77,7 @@ class Accounts extends Controller
     }
     public function update($id): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             try {
                 $account = AccountQuery::create()
                     ->filterById(Session::get('userId'))
@@ -81,11 +90,20 @@ class Accounts extends Controller
                         View::render("update");
                     }
                     if ($_POST) {
+                        $v = new Validator($_POST);
+                        $v->rule('required', ['name']);
+                        if($v->validate()) {
+                            $account->setName(Sanatize::sanitizeText($_POST['name']));
+                            $account->save();
+                            Session::set('action', 'Cuenta Actualizada');
+                            $this->toMain();
+                        } else{
+                            Session::set("action", "Nombre es requerido");
+                            $this->redirect(array("controller"=>"accounts", "action" => "update/".$id));
+                            exit();
+                        }
 
-                        $account->setName($_POST["name"]);
-                        $account->save();
-                        Session::set('action', 'Cuenta Actualizada');
-                        $this->toMain();
+
                     }
                 } else {
                     Session::set("action", "No se ha encontrado la cuenta");
@@ -105,7 +123,7 @@ class Accounts extends Controller
 
     public function delete($id): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             try {
                 $account = AccountQuery::create()
                     ->filterByUserId(Session::get("userId"))

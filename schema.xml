@@ -57,6 +57,7 @@
     <column name="displayName" phpName="Displayname" type="VARCHAR" size="255"/>
     <column name="password" phpName="Password" type="VARCHAR" size="255" required="true"/>
     <column name="email" phpName="Email" type="VARCHAR" size="255" required="true"/>
+    <column name="rol" phpName="Rol" type="VARCHAR" size="20" required="true" defaultValue="user"/>
     <vendor type="mysql">
       <parameter name="Engine" value="InnoDB"/>
     </vendor>

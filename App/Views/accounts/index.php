@@ -31,3 +31,14 @@
         </tbody>
     </table>
 </div>
+<div class="fixed-action-btn">
+    <a id="floating" href="<?php echo APP_URL ?>accounts/add" class="btn-floating btn-large waves-effect waves-light red">
+        <i class="material-icons">add</i>
+    </a>
+</div>
+
+<div class="tap-target blue darken-2" data-target="floating">
+    <div class="tap-target-content">
+        <h5 class="white-text text-darken-2">Haz click para agregar Transacciones</h5>
+    </div>
+</div>

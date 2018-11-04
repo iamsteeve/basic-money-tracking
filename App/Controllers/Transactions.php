@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use App\Models\TransactionQuery;
 use App\Extensions\Transactions as TransactionsExtension;
 use App\Services\Authentication;
+use App\Services\Sanatize;
 use Core\Controller;
 use Core\View;
 use Josantonius\Session\Session;
@@ -24,10 +25,14 @@ class Transactions extends Controller
 
     public function index(): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             try{
-                $categories = CategoryQuery::create()->find();
-                $accounts = AccountQuery::create()->find();
+                $categories = CategoryQuery::create()
+                    ->filterByUserId(Session::get('userId'))
+                    ->find();
+                $accounts = AccountQuery::create()
+                    ->filterByUserId(Session::get('userId'))
+                    ->find();
                 $transactions = TransactionQuery::create()
                     ->filterByCategory($categories)
                     ->filterByAccount($accounts)
@@ -56,6 +61,7 @@ class Transactions extends Controller
                 echo $propelException->getMessage();
             }
         } else {
+
             $this->toLogin();
         }
     }
@@ -63,12 +69,12 @@ class Transactions extends Controller
 
     public function add(): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && Authentication::checkUniqueRole("user")|| Authentication::checkUniqueRole("admin")){
             if ($_POST) {
                 try {
                     $transaction = new Transaction();
                     $transaction->setId(null);
-                    $transaction->setDescription($_POST['description']);
+                    $transaction->setDescription(Sanatize::sanitizeText($_POST['description']));
                     $transaction->setDate($_POST['date']);
                     $transaction->setAmount($_POST['amount']);
                     $transaction->setCategoryId($_POST['category_id']);
@@ -78,7 +84,8 @@ class Transactions extends Controller
                     $this->redirect(array("controller"=>"transactions"));
                     exit();
                 } catch (PropelException $propelException) {
-                    echo $propelException->getMessage();
+                    Session::set("action", "No se ha podido agregar la transacción");
+                    $this->toMain();
                 }
             }
             if ($_GET) {
@@ -96,7 +103,7 @@ class Transactions extends Controller
     }
     public function update($id): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin")){
             try {
                 $transaction = TransactionQuery::create()->findPk($id);
                 if ($_GET){
@@ -112,7 +119,7 @@ class Transactions extends Controller
                 }
                 if ($_POST){
 
-                    $transaction->setDescription($_POST['description']);
+                    $transaction->setDescription(Sanatize::sanitizeText($_POST['description']));
                     $transaction->setDate($_POST['date']);
                     $transaction->setAmount($_POST['amount']);
                     $transaction->setCategoryId($_POST['category_id']);
@@ -123,7 +130,8 @@ class Transactions extends Controller
                     exit();
                 }
             } catch (PropelException $propelException) {
-                echo $propelException->getMessage();
+                Session::set("action", "No se ha podido Actualizar la transacción");
+                $this->toMain();
             }
         } else {
             $this->toLogin();
@@ -132,7 +140,7 @@ class Transactions extends Controller
 
     public function delete($id): void
     {
-        if (Authentication::isLogged()){
+        if (Authentication::isLogged() && Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin")){
             try {
                 $transaction = TransactionQuery::create()->findPk($id);
                 $transaction->delete();
@@ -140,7 +148,8 @@ class Transactions extends Controller
                 $this->redirect(array("controller"=> "transactions"));
                 exit();
             } catch (PropelException $propelException) {
-                echo $propelException->getMessage();
+                Session::set("action", "No se ha podido eliminar la transacción");
+                $this->toMain();
             }
         } else {
             $this->toLogin();

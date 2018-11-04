@@ -4,8 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c44c367027e0df933a5c0e15e4dce964",
+    "content-hash": "16100e382c6a01dae5af4f1d3dd3dafd",
     "packages": [
+        {
+            "name": "gustavonecore/php-sanitizer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gustavonecore/sanitizer.git",
+                "reference": "5deb963db0254f929cce4635c92812c3f71038cb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gustavonecore/sanitizer/zipball/5deb963db0254f929cce4635c92812c3f71038cb",
+                "reference": "5deb963db0254f929cce4635c92812c3f71038cb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phploc/phploc": "*",
+                "phpmd/phpmd": "1.5.*",
+                "phpunit/phpunit": "^5.0",
+                "sebastian/phpcpd": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gcore\\": "src/",
+                    "Test\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gustavo Delgado R.",
+                    "email": "gustavo.uach@gmail.com"
+                }
+            ],
+            "description": "PHP data sanitizer",
+            "time": "2017-11-27T20:39:05+00:00"
+        },
         {
             "name": "josantonius/session",
             "version": "1.1.8",
@@ -786,13 +834,63 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2018-10-02T16:36:10+00:00"
+        },
+        {
+            "name": "vlucas/valitron",
+            "version": "v1.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vlucas/valitron.git",
+                "reference": "3c5463315bfa23b17f8949b100a960d035234e43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vlucas/valitron/zipball/3c5463315bfa23b17f8949b100a960d035234e43",
+                "reference": "3c5463315bfa23b17f8949b100a960d035234e43",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8.35 || ^5.5 || ^6.5"
+            },
+            "suggest": {
+                "ext-mbstring": "It can support the multiple bytes string length."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Valitron\\": "src/Valitron"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Vance Lucas",
+                    "email": "vance@vancelucas.com",
+                    "homepage": "http://www.vancelucas.com"
+                }
+            ],
+            "description": "Simple, elegant, stand-alone validation library with NO dependencies",
+            "homepage": "http://github.com/vlucas/valitron",
+            "keywords": [
+                "valid",
+                "validation",
+                "validator"
+            ],
+            "time": "2018-05-06T10:45:26+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "propel/propel": 20
+        "propel/propel": 20,
+        "gustavonecore/php-sanitizer": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

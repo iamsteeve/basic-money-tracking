@@ -17,9 +17,7 @@
     "require": {
         "propel/propel": "~2.0@dev",
         "league/plates": "^3.3",
-        "josantonius/session": "^1.1"
-    },
-    "require-dev": {
-        "phpdocumentor/phpdocumentor": "dev-master"
+        "josantonius/session": "^1.1",
+        "vlucas/valitron": "^1.4"
     }
 }
