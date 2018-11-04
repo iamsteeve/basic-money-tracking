@@ -38,7 +38,7 @@ class View
         try {
             return $template->render();
         } catch (\Throwable $e) {
-
+            return $e->getMessage();
         }
     }
 
