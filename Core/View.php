@@ -2,6 +2,7 @@
 
 namespace Core;
 
+use App\Services\Authentication;
 use Josantonius\Session\Session;
 use League\Plates\Engine;
 
@@ -14,27 +15,35 @@ class View
     private static $_templates;
     private static $_controller;
 
-    private function __construct(){}
-    private function __clone(){}
+    private function __construct()
+    {
+    }
+
+    private function __clone()
+    {
+    }
 
     static public function createEngineOfTemplates(Request $request, $extensionTemplate = "php"): void
     {
         self::$_controller = $request->getController();
-        $layoutPath = VIEWS_FOLDER. "layouts".DS.DEFAULT_LAYOUT;
-        $controllerPath = VIEWS_FOLDER. self::$_controller;
+        $layoutPath = VIEWS_FOLDER . "layouts" . DS . DEFAULT_LAYOUT;
+        $controllerPath = VIEWS_FOLDER . self::$_controller;
 
         self::$_templates = new Engine(VIEWS_FOLDER, $extensionTemplate);
         self::$_templates->addFolder("layouts", $layoutPath);
         self::$_templates->addFolder(self::$_controller, $controllerPath);
 
     }
-    static public function renderErrorController(string $title = "error", string $errorMessage = "Ha sucedido un error", string $extensionTemplate = "php"): string {
-        $layoutPath = VIEWS_FOLDER. "layouts".DS.DEFAULT_LAYOUT;
+
+    static public function renderErrorController(string $title = "error", string $errorMessage = "Ha sucedido un error", string $extensionTemplate = "php"): string
+    {
+        $layoutPath = VIEWS_FOLDER . "layouts" . DS . DEFAULT_LAYOUT;
         self::$_templates = new Engine(VIEWS_FOLDER, $extensionTemplate);
         self::$_templates->addFolder("layouts", $layoutPath);
-        self::$_templates->addFolder("errors", VIEWS_FOLDER."errors");
+        self::$_templates->addFolder("errors", VIEWS_FOLDER . "errors");
         $template = self::$_templates->make("errors::index");
-        $template->data(["message" => $errorMessage, "title" => $title ]);
+        $template->data(["message" => $errorMessage, "title" => $title]);
+        self::$_templates->addData(['isLogged' => Authentication::isLogged()], 'layouts::header');
         try {
             return $template->render();
         } catch (\Throwable $e) {
@@ -49,10 +58,13 @@ class View
 
     static public function sendActionSessionToView(): void
     {
-        if (Session::get('action')){
-            self::$_templates->addData(['action'=>Session::get('action')],'layouts::base');
+        if (Session::get('action')) {
+            self::$_templates->addData(['action' => Session::get('action')], 'layouts::base');
             Session::set('action', false);
         }
+
+        self::$_templates->addData(['isLogged' => Authentication::isLogged()], 'layouts::header');
+
     }
 
     static public function setData(string $name, $value): void
@@ -69,8 +81,6 @@ class View
             self::$_data
         );
     }
-
-
 
 
 }

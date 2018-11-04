@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="material-icons prefix">email</i>
-                        <input class="validate" id="email" name="email" type="text" required/>
+                        <input class="validate" id="email" name="email" type="email" required/>
                         <label for="email">Email</label>
                     </div>
                 </div>

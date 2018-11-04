@@ -6,6 +6,7 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Models\UserQuery;
 use App\Services\Authentication;
+use App\Services\Sanatize;
 use Core\Controller;
 use Core\View;
 use Josantonius\Session\Session;
@@ -43,7 +44,7 @@ class Home extends Controller
         }
         if ($_POST){
             $user = UserQuery::create()
-                ->filterByEmail($_POST['email'])
+                ->filterByEmail(Sanatize::isEmail($_POST['email']))
                 ->filterByPassword($_POST['password'])
                 ->findOne();
             if ($user && Authentication::signIn($user->getDisplayname(),$user->getId(),$user->getRol())){
@@ -92,10 +93,10 @@ class Home extends Controller
                             $newUser = new User();
                             $newUser->setId(null);
                             $newUser->setPassword($_POST['password']);
-                            $newUser->setEmail($_POST['email']);
-                            $newUser->setDisplayname($_POST['displayname']);
+                            $newUser->setEmail(Sanatize::isEmail($_POST['email']));
+                            $newUser->setDisplayname(Sanatize::sanitizeText($_POST['displayname']));
                             $newUser->setRol('user');
-                            $newUser->setName($_POST['name']);
+                            $newUser->setName(Sanatize::sanitizeText($_POST['name']));
                             $newUser->save();
                             if (Authentication::signIn($newUser->getDisplayname() ? $newUser->getDisplayname() : $newUser->getEmail(), $newUser->getId(), $newUser->getRol())) {
                                 Session::set('action', 'Se ha iniciado sesión con éxito');

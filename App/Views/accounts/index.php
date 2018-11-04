@@ -39,6 +39,6 @@
 
 <div class="tap-target blue darken-2" data-target="floating">
     <div class="tap-target-content">
-        <h5 class="white-text text-darken-2">Haz click para agregar Transacciones</h5>
+        <h5 class="white-text text-darken-2">Haz click para agregar Cuentas</h5>
     </div>
 </div>
