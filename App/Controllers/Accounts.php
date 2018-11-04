@@ -50,11 +50,11 @@ class Accounts extends Controller
                     $account->setUserId(Session::get("userId"));
                     $account->save();
                     Session::set('action','Cuenta agregada');
-                    $this->redirect(array("controller" => "accounts"));
-                    exit();
+                    $this->toMain();
 
                 } catch (PropelException $e) {
-                    echo $e->getMessage();
+                    Session::set("action","No se ha podido agregar el registro");
+                    $this->toMain();
                 }
             }
             if ($_GET) {
@@ -85,17 +85,16 @@ class Accounts extends Controller
                         $account->setName($_POST["name"]);
                         $account->save();
                         Session::set('action', 'Cuenta Actualizada');
-                        $this->redirect(array("controller" => "accounts"));
-                        exit();
+                        $this->toMain();
                     }
                 } else {
                     Session::set("action", "No se ha encontrado la cuenta");
-                    $this->redirect(array("controller"=>"accounts"));
-                    exit();
+                    $this->toMain();
                 }
 
             } catch (PropelException $propelException) {
-                echo $propelException->getMessage();
+                Session::set("action","No se ha podido actualizar el registro");
+                $this->toMain();
             }
         } else {
             $this->toLogin();
@@ -114,16 +113,15 @@ class Accounts extends Controller
                 if ($account){
                     $account->delete();
                     Session::set("action", "Se ha eliminado una cuenta");
-                    $this->redirect(array("controller"=> "accounts"));
-                    exit();
+                    $this->toMain();
                 } else{
-                    Session::set("action","Acceso denegado");
-                    $this->redirect(array("controller"=> "accounts"));
-                    exit();
+                    Session::set("action","No se ha encontrado el registro");
+                    $this->toMain();
                 }
 
             } catch (PropelException $propelException){
-                echo $propelException->getMessage();
+                Session::set("action","No se ha podido eliminar el registro");
+                $this->toMain();
             }
         } else{
             $this->toLogin();
