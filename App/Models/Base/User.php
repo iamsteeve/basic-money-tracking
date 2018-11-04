@@ -6,9 +6,12 @@ use \Exception;
 use \PDO;
 use App\Models\Account as ChildAccount;
 use App\Models\AccountQuery as ChildAccountQuery;
+use App\Models\Category as ChildCategory;
+use App\Models\CategoryQuery as ChildCategoryQuery;
 use App\Models\User as ChildUser;
 use App\Models\UserQuery as ChildUserQuery;
 use App\Models\Map\AccountTableMap;
+use App\Models\Map\CategoryTableMap;
 use App\Models\Map\UserTableMap;
 use Propel\Runtime\Propel;
 use Propel\Runtime\ActiveQuery\Criteria;
@@ -106,6 +109,12 @@ abstract class User implements ActiveRecordInterface
     protected $collAccountsPartial;
 
     /**
+     * @var        ObjectCollection|ChildCategory[] Collection to store aggregation of ChildCategory objects.
+     */
+    protected $collCategories;
+    protected $collCategoriesPartial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      *
@@ -118,6 +127,12 @@ abstract class User implements ActiveRecordInterface
      * @var ObjectCollection|ChildAccount[]
      */
     protected $accountsScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ChildCategory[]
+     */
+    protected $categoriesScheduledForDeletion = null;
 
     /**
      * Initializes internal state of App\Models\Base\User object.
@@ -615,6 +630,8 @@ abstract class User implements ActiveRecordInterface
 
             $this->collAccounts = null;
 
+            $this->collCategories = null;
+
         } // if (deep)
     }
 
@@ -740,6 +757,23 @@ abstract class User implements ActiveRecordInterface
 
             if ($this->collAccounts !== null) {
                 foreach ($this->collAccounts as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->categoriesScheduledForDeletion !== null) {
+                if (!$this->categoriesScheduledForDeletion->isEmpty()) {
+                    \App\Models\CategoryQuery::create()
+                        ->filterByPrimaryKeys($this->categoriesScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->categoriesScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collCategories !== null) {
+                foreach ($this->collCategories as $referrerFK) {
                     if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -946,6 +980,21 @@ abstract class User implements ActiveRecordInterface
                 }
 
                 $result[$key] = $this->collAccounts->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collCategories) {
+
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'categories';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'categories';
+                        break;
+                    default:
+                        $key = 'Categories';
+                }
+
+                $result[$key] = $this->collCategories->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1195,6 +1244,12 @@ abstract class User implements ActiveRecordInterface
                 }
             }
 
+            foreach ($this->getCategories() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addCategory($relObj->copy($deepCopy));
+                }
+            }
+
         } // if ($deepCopy)
 
         if ($makeNew) {
@@ -1238,6 +1293,10 @@ abstract class User implements ActiveRecordInterface
     {
         if ('Account' == $relationName) {
             $this->initAccounts();
+            return;
+        }
+        if ('Category' == $relationName) {
+            $this->initCategories();
             return;
         }
     }
@@ -1468,6 +1527,231 @@ abstract class User implements ActiveRecordInterface
     }
 
     /**
+     * Clears out the collCategories collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addCategories()
+     */
+    public function clearCategories()
+    {
+        $this->collCategories = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collCategories collection loaded partially.
+     */
+    public function resetPartialCategories($v = true)
+    {
+        $this->collCategoriesPartial = $v;
+    }
+
+    /**
+     * Initializes the collCategories collection.
+     *
+     * By default this just sets the collCategories collection to an empty array (like clearcollCategories());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initCategories($overrideExisting = true)
+    {
+        if (null !== $this->collCategories && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = CategoryTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collCategories = new $collectionClassName;
+        $this->collCategories->setModel('\App\Models\Category');
+    }
+
+    /**
+     * Gets an array of ChildCategory objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildUser is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ChildCategory[] List of ChildCategory objects
+     * @throws PropelException
+     */
+    public function getCategories(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collCategoriesPartial && !$this->isNew();
+        if (null === $this->collCategories || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collCategories) {
+                // return empty collection
+                $this->initCategories();
+            } else {
+                $collCategories = ChildCategoryQuery::create(null, $criteria)
+                    ->filterByUser($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collCategoriesPartial && count($collCategories)) {
+                        $this->initCategories(false);
+
+                        foreach ($collCategories as $obj) {
+                            if (false == $this->collCategories->contains($obj)) {
+                                $this->collCategories->append($obj);
+                            }
+                        }
+
+                        $this->collCategoriesPartial = true;
+                    }
+
+                    return $collCategories;
+                }
+
+                if ($partial && $this->collCategories) {
+                    foreach ($this->collCategories as $obj) {
+                        if ($obj->isNew()) {
+                            $collCategories[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collCategories = $collCategories;
+                $this->collCategoriesPartial = false;
+            }
+        }
+
+        return $this->collCategories;
+    }
+
+    /**
+     * Sets a collection of ChildCategory objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $categories A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildUser The current object (for fluent API support)
+     */
+    public function setCategories(Collection $categories, ConnectionInterface $con = null)
+    {
+        /** @var ChildCategory[] $categoriesToDelete */
+        $categoriesToDelete = $this->getCategories(new Criteria(), $con)->diff($categories);
+
+
+        $this->categoriesScheduledForDeletion = $categoriesToDelete;
+
+        foreach ($categoriesToDelete as $categoryRemoved) {
+            $categoryRemoved->setUser(null);
+        }
+
+        $this->collCategories = null;
+        foreach ($categories as $category) {
+            $this->addCategory($category);
+        }
+
+        $this->collCategories = $categories;
+        $this->collCategoriesPartial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related Category objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related Category objects.
+     * @throws PropelException
+     */
+    public function countCategories(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collCategoriesPartial && !$this->isNew();
+        if (null === $this->collCategories || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collCategories) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getCategories());
+            }
+
+            $query = ChildCategoryQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByUser($this)
+                ->count($con);
+        }
+
+        return count($this->collCategories);
+    }
+
+    /**
+     * Method called to associate a ChildCategory object to this object
+     * through the ChildCategory foreign key attribute.
+     *
+     * @param  ChildCategory $l ChildCategory
+     * @return $this|\App\Models\User The current object (for fluent API support)
+     */
+    public function addCategory(ChildCategory $l)
+    {
+        if ($this->collCategories === null) {
+            $this->initCategories();
+            $this->collCategoriesPartial = true;
+        }
+
+        if (!$this->collCategories->contains($l)) {
+            $this->doAddCategory($l);
+
+            if ($this->categoriesScheduledForDeletion and $this->categoriesScheduledForDeletion->contains($l)) {
+                $this->categoriesScheduledForDeletion->remove($this->categoriesScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ChildCategory $category The ChildCategory object to add.
+     */
+    protected function doAddCategory(ChildCategory $category)
+    {
+        $this->collCategories[]= $category;
+        $category->setUser($this);
+    }
+
+    /**
+     * @param  ChildCategory $category The ChildCategory object to remove.
+     * @return $this|ChildUser The current object (for fluent API support)
+     */
+    public function removeCategory(ChildCategory $category)
+    {
+        if ($this->getCategories()->contains($category)) {
+            $pos = $this->collCategories->search($category);
+            $this->collCategories->remove($pos);
+            if (null === $this->categoriesScheduledForDeletion) {
+                $this->categoriesScheduledForDeletion = clone $this->collCategories;
+                $this->categoriesScheduledForDeletion->clear();
+            }
+            $this->categoriesScheduledForDeletion[]= clone $category;
+            $category->setUser(null);
+        }
+
+        return $this;
+    }
+
+    /**
      * Clears the current object, sets all attributes to their default values and removes
      * outgoing references as well as back-references (from other objects to this one. Results probably in a database
      * change of those foreign objects when you call `save` there).
@@ -1502,9 +1786,15 @@ abstract class User implements ActiveRecordInterface
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collCategories) {
+                foreach ($this->collCategories as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         $this->collAccounts = null;
+        $this->collCategories = null;
     }
 
     /**

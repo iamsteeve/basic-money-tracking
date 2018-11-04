@@ -165,6 +165,13 @@ class UserTableMap extends TableMap
     1 => ':id',
   ),
 ), null, 'CASCADE', 'Accounts', false);
+        $this->addRelation('Category', '\\App\\Models\\Category', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':user_id',
+    1 => ':id',
+  ),
+), null, 'CASCADE', 'Categories', false);
     } // buildRelations()
 
     /**

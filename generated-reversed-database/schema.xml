@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<database name="default" defaultIdMethod="native" namespace="\App\Models" defaultPhpNamingMethod="underscore">
-  <table name="account" idMethod="native" phpName="Account" namespace="\App\Models">
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="account" idMethod="native" phpName="Account">
     <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="user_id" phpName="UserId" type="INTEGER" required="true"/>
     <column name="name" phpName="Name" type="VARCHAR" size="60"/>
@@ -14,7 +14,7 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
-  <table name="category" idMethod="native" phpName="Category" namespace="\App\Models">
+  <table name="category" idMethod="native" phpName="Category">
     <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="name" phpName="Name" type="VARCHAR" size="60"/>
     <column name="user_id" phpName="UserId" type="INTEGER" required="true"/>
@@ -28,7 +28,7 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
-  <table name="transaction" idMethod="native" phpName="Transaction" namespace="\App\Models">
+  <table name="transaction" idMethod="native" phpName="Transaction">
     <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="account_id" phpName="AccountId" type="INTEGER" required="true"/>
     <column name="category_id" phpName="CategoryId" type="INTEGER" required="true"/>
@@ -51,7 +51,7 @@
       <parameter name="Engine" value="InnoDB"/>
     </vendor>
   </table>
-  <table name="user" idMethod="native" phpName="User" namespace="\App\Models">
+  <table name="user" idMethod="native" phpName="User">
     <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
     <column name="name" phpName="Name" type="VARCHAR" size="255" required="true"/>
     <column name="displayName" phpName="Displayname" type="VARCHAR" size="255"/>

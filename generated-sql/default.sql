@@ -32,7 +32,13 @@ CREATE TABLE `category`
 (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(60),
-    PRIMARY KEY (`id`)
+    `user_id` INTEGER NOT NULL,
+    PRIMARY KEY (`id`),
+    INDEX `user_id` (`user_id`),
+    CONSTRAINT `category_ibfk_1`
+        FOREIGN KEY (`user_id`)
+        REFERENCES `user` (`id`)
+        ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 -- ---------------------------------------------------------------------

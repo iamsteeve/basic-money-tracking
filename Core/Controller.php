@@ -2,7 +2,6 @@
 
 namespace Core;
 
-
 abstract class Controller
 {
 
@@ -15,6 +14,7 @@ abstract class Controller
     {
         $this->request = new Request();
         View::createEngineOfTemplates($this->request, $extensionTemplate);
+
     }
 
     public function redirect($url = array()): void {
@@ -28,6 +28,10 @@ abstract class Controller
 
         header("Location: ". APP_URL.$path);
 
+    }
+    public function toLogin(){
+        $this->redirect(array("controller"=>"home", "action"=>"login"));
+        exit();
     }
 
     public abstract function index():void;
