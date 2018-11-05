@@ -2,7 +2,7 @@
 
 <div class="container">
     <h2>Lista de Cuentas</h2>
-    <!-- a class="btn" href="<?//php echo APP_URL ?>categories/add">Agregar Categoría</a-->
+    <a class="btn" href="<?= APP_URL ?>accounts/add">Agregar Cuentas</a>
     <button class="btn" onclick="$('.tap-target').tapTarget('open');">Ayuda!</button>
     <table class="highlight responsive-table" border="1">
         <thead>

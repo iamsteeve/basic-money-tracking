@@ -13,7 +13,7 @@ define("APP_FOLDER", "money-tracking");
 /**
  * Controlador por default
  */
-define("DEFAULT_CONTROLLER", "transactions");
+define("DEFAULT_CONTROLLER", "accounts");
 
 /**
  * Layout Por default
@@ -28,7 +28,7 @@ define("APP_URL", "http://".$_SERVER['SERVER_NAME']."/".APP_FOLDER."/");
 /**
  * Nombre de la aplicación
  */
-define("APP_NAME", "Arquitectura MVC");
+define("APP_NAME", "MoneyTracking");
 /**
  * Assets CSS de la aplicación --> Example: SCSS builds or Webpack Builds
  */
