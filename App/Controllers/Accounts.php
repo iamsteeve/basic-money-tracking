@@ -99,7 +99,7 @@ class Accounts extends Controller
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
             try {
                 $account = AccountQuery::create()
-                    ->filterById(Session::get('userId'))
+                    ->filterByUserId(Authentication::getUserId())
                     ->findPk($id);
                 if ($account){
                     if ($_GET) {
