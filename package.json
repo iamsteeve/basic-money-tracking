@@ -1,0 +1,32 @@
+{
+  "name": "money-tracking",
+  "version": "1.0.0",
+  "description": "Money Tracking Aplicación",
+  "private": true,
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamsteeve/basic-money-tracking.git"
+  },
+  "author": "Steeve Luis Angel Torres Agustin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iamsteeve/basic-money-tracking/issues"
+  },
+  "homepage": "https://github.com/iamsteeve/basic-money-tracking#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.1",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.25.1",
+    "webpack-cli": "^3.1.2"
+  }
+}

@@ -7,24 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?= APP_URL_CSS ?>materialize.min.css">
+    <link rel="stylesheet" href="<?= APP_URL_CSS ?>main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500" rel="stylesheet">
 
     <title><?= $title? $this->e($title): 'MoneyTracking!!'  ?></title>
-    <style>
-        body {
-            font-family: 'Dosis', sans-serif;
 
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
-        }
-
-        main {
-            flex: 1 0 auto;
-        }
-    </style>
 </head>
 <body>
 
@@ -38,7 +26,7 @@
      crossorigin="anonymous">
 
  </script>
- <script src="<?= APP_URL_JS ?>materialize.min.js"></script>
+ <script src="<?= APP_URL_JS ?>materialize.js"></script>
 
  <script>
      $(document).ready(function () {
