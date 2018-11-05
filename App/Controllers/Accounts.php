@@ -159,12 +159,11 @@ class Accounts extends Controller
                     Session::set("action","No se ha encontrado el registro");
                     $this->toMain();
                 }
-
             } catch (PropelException $propelException){
                 Session::set("action","No se ha podido eliminar el registro");
                 $this->toMain();
             }
-        } else{
+        } else {
             $this->toLogin();
         }
     }
