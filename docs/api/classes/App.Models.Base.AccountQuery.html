@@ -1,0 +1,2847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/App.html">\App</a></li>
+                                                        <li><a href="../namespaces/Core.html">\Core</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">79</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-236563518"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-236563518" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1918231958"></a>
+                                <a href="../namespaces/App.html" style="margin-left: 30px; padding-left: 0">App</a>
+            </div>
+            <div id="namespace-1918231958" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-918873458"></a>
+                                <a href="../namespaces/App.Controllers.html" style="margin-left: 30px; padding-left: 0">Controllers</a>
+            </div>
+            <div id="namespace-918873458" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/App.Controllers.Accounts.html">Accounts</a></li>
+                                                    <li class="class"><a href="../classes/App.Controllers.Categories.html">Categories</a></li>
+                                                    <li class="class"><a href="../classes/App.Controllers.Home.html">Home</a></li>
+                                                    <li class="class"><a href="../classes/App.Controllers.Transactions.html">Transactions</a></li>
+                                                    <li class="class"><a href="../classes/App.Controllers.Users.html">Users</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1125061647"></a>
+                                <a href="../namespaces/App.Extensions.html" style="margin-left: 30px; padding-left: 0">Extensions</a>
+            </div>
+            <div id="namespace-1125061647" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/App.Extensions.Transactions.html">Transactions</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1491863747"></a>
+                                <a href="../namespaces/App.Models.html" style="margin-left: 30px; padding-left: 0">Models</a>
+            </div>
+            <div id="namespace-1491863747" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1860968545"></a>
+                                <a href="../namespaces/App.Models.Base.html" style="margin-left: 30px; padding-left: 0">Base</a>
+            </div>
+            <div id="namespace-1860968545" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/App.Models.Base.Account.html">Account</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Base.AccountQuery.html">AccountQuery</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Base.Category.html">Category</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Base.CategoryQuery.html">CategoryQuery</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Base.Transaction.html">Transaction</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Base.TransactionQuery.html">TransactionQuery</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Base.User.html">User</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Base.UserQuery.html">UserQuery</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-173264149"></a>
+                                <a href="../namespaces/App.Models.Map.html" style="margin-left: 30px; padding-left: 0">Map</a>
+            </div>
+            <div id="namespace-173264149" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/App.Models.Map.AccountTableMap.html">AccountTableMap</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Map.CategoryTableMap.html">CategoryTableMap</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Map.TransactionTableMap.html">TransactionTableMap</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Map.UserTableMap.html">UserTableMap</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/App.Models.Account.html">Account</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.AccountQuery.html">AccountQuery</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Category.html">Category</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.CategoryQuery.html">CategoryQuery</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.Transaction.html">Transaction</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.TransactionQuery.html">TransactionQuery</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.User.html">User</a></li>
+                                                    <li class="class"><a href="../classes/App.Models.UserQuery.html">UserQuery</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-564548251"></a>
+                                <a href="../namespaces/App.Services.html" style="margin-left: 30px; padding-left: 0">Services</a>
+            </div>
+            <div id="namespace-564548251" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/App.Services.Authentication.html">Authentication</a></li>
+                                                    <li class="class"><a href="../classes/App.Services.Sanatize.html">Sanatize</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1584258767"></a>
+                                <a href="../namespaces/Core.html" style="margin-left: 30px; padding-left: 0">Core</a>
+            </div>
+            <div id="namespace-1584258767" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/Core.App.html">App</a></li>
+                                                    <li class="class"><a href="../classes/Core.Controller.html">Controller</a></li>
+                                                    <li class="class"><a href="../classes/Core.Request.html">Request</a></li>
+                                                    <li class="class"><a href="../classes/Core.View.html">View</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/App.Models.Base.html">\App\Models\Base</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\App\Models\Base</small>AccountQuery</h1>
+                    <p><em>Base class that represents a query for the &#039;account&#039; table.</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_create" class="">create()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findPk" class="">findPk()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findPks" class="">findPks()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_filterByPrimaryKey" class="">filterByPrimaryKey()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_filterByPrimaryKeys" class="">filterByPrimaryKeys()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_filterById" class="">filterById()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_filterByUserId" class="">filterByUserId()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_filterByName" class="">filterByName()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_filterByUser" class="">filterByUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_joinUser" class="">joinUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_useUserQuery" class="">useUserQuery()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_filterByTransaction" class="">filterByTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_joinTransaction" class="">joinTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_useTransactionQuery" class="">useTransactionQuery()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_prune" class="">prune()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_doDeleteAll" class="">doDeleteAll()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_delete" class="">delete()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_orderById" class="">orderById()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_orderByUserId" class="">orderByUserId()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_orderByName" class="">orderByName()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_groupById" class="">groupById()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_groupByUserId" class="">groupByUserId()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_groupByName" class="">groupByName()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_leftJoin" class="">leftJoin()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_rightJoin" class="">rightJoin()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_innerJoin" class="">innerJoin()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_leftJoinWith" class="">leftJoinWith()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_rightJoinWith" class="">rightJoinWith()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_innerJoinWith" class="">innerJoinWith()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_leftJoinUser" class="">leftJoinUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_rightJoinUser" class="">rightJoinUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_innerJoinUser" class="">innerJoinUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_joinWithUser" class="">joinWithUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_leftJoinWithUser" class="">leftJoinWithUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_rightJoinWithUser" class="">rightJoinWithUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_innerJoinWithUser" class="">innerJoinWithUser()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_leftJoinTransaction" class="">leftJoinTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_rightJoinTransaction" class="">rightJoinTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_innerJoinTransaction" class="">innerJoinTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_joinWithTransaction" class="">joinWithTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_leftJoinWithTransaction" class="">leftJoinWithTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_rightJoinWithTransaction" class="">rightJoinWithTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_innerJoinWithTransaction" class="">innerJoinWithTransaction()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_endUse" class="">endUse()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findOne" class="">findOne()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findOneOrCreate" class="">findOneOrCreate()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findOneById" class="">findOneById()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findOneByUserId" class="">findOneByUserId()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findOneByName" class="">findOneByName()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_requirePk" class="">requirePk()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_requireOne" class="">requireOne()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_requireOneById" class="">requireOneById()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_requireOneByUserId" class="">requireOneByUserId()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_requireOneByName" class="">requireOneByName()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_" class="">()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_" class="">()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_" class="">()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_" class="">()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_" class="">()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findPkSimple" class="">findPkSimple()</a><br />
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#method_findPkComplex" class="">findPkComplex()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/App.Models.Base.AccountQuery.html#property_entityNotFoundExceptionClass" class="">$entityNotFoundExceptionClass</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                            <span class="label label-info">abstract</span>
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/App.Models.Base.AccountQuery.html"><div class="path-wrapper">App/Models/Base/AccountQuery.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\Propel\Runtime\ActiveQuery\ModelCriteria</div>
+                                                                                                    <div class="namespace-wrapper">\App\Models\Base\AccountQuery</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_entityNotFoundExceptionClass" name="property_entityNotFoundExceptionClass" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$entityNotFoundExceptionClass</h3>
+                <pre class="signature">$entityNotFoundExceptionClass : </pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(string  <span class="argument">$dbName = &#039;default&#039;</span>, string  <span class="argument">$modelName = &#039;\\App\\Models\\Account&#039;</span>, string  <span class="argument">$modelAlias = null</span>) </pre>
+                <p><em>Initializes internal state of \App\Models\Base\AccountQuery object.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$dbName </td>
+                                <td><p>The database name</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$modelName </td>
+                                <td><p>The phpName of a model, e.g. 'Book'</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$modelAlias </td>
+                                <td><p>The alias for the model in this query, e.g. 'b'</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_create" name="method_create" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">create()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">create(string  <span class="argument">$modelAlias = null</span>, \Propel\Runtime\ActiveQuery\Criteria  <span class="argument">$criteria = null</span>) : \App\Models\AccountQuery</pre>
+                <p><em>Returns a new ChildAccountQuery object.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$modelAlias </td>
+                                <td><p>The alias of a model in the query</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Propel\Runtime\ActiveQuery\Criteria</td>
+                                <td>$criteria </td>
+                                <td><p>Optional Criteria to build the query from</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findPk" name="method_findPk" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findPk()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findPk(mixed  <span class="argument">$key</span>, \Propel\Runtime\Connection\ConnectionInterface  <span class="argument">$con = null</span>) : \App\Models\Account|array|mixed</pre>
+                <p><em>Find object by primary key.</em></p>
+                <p>Propel uses the instance pool to skip the database if the object exists.
+Go fast if the query is untouched.</p>
+<p><code>
+$obj  = $c-&gt;findPk(12, $con);
+</code></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td><p>Primary key to use for the query</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Propel\Runtime\Connection\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td><p>an optional connection object</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.Account.html">\App\Models\Account</a>|array|mixed
+                                            &mdash; <p>the result, formatted by the current formatter</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findPks" name="method_findPks" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findPks()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findPks(array  <span class="argument">$keys</span>, \Propel\Runtime\Connection\ConnectionInterface  <span class="argument">$con = null</span>) : \Propel\Runtime\Collection\ObjectCollection|array|mixed</pre>
+                <p><em>Find objects by primary key
+&lt;code&gt;
+$objs = $c-&gt;findPks(array(12, 56, 832), $con);
+&lt;/code&gt;</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$keys </td>
+                                <td><p>Primary keys to use for the query</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Propel\Runtime\Connection\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td><p>an optional connection object</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \Propel\Runtime\Collection\ObjectCollection|array|mixed
+                                            &mdash; <p>the list of results, formatted by the current formatter</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterByPrimaryKey" name="method_filterByPrimaryKey" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterByPrimaryKey()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterByPrimaryKey(mixed  <span class="argument">$key</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Filter the query by primary key</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td><p>Primary key to use for the query</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterByPrimaryKeys" name="method_filterByPrimaryKeys" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterByPrimaryKeys()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterByPrimaryKeys(array  <span class="argument">$keys</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Filter the query by a list of primary keys</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$keys </td>
+                                <td><p>The list of primary key to use for the query</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterById" name="method_filterById" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterById()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterById(mixed  <span class="argument">$id = null</span>, string  <span class="argument">$comparison = null</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Filter the query on the id column</em></p>
+                <p>Example usage:
+<code>
+$query-&gt;filterById(1234); // WHERE id = 1234
+$query-&gt;filterById(array(12, 34)); // WHERE id IN (12, 34)
+$query-&gt;filterById(array('min' =&gt; 12)); // WHERE id &gt; 12
+</code></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$id </td>
+                                <td><p>The value to use as filter.
+Use scalar values for equality.
+Use array values for in_array() equivalent.
+Use associative array('min' =&gt; $minValue, 'max' =&gt; $maxValue) for intervals.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$comparison </td>
+                                <td><p>Operator to use for the column comparison, defaults to Criteria::EQUAL</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterByUserId" name="method_filterByUserId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterByUserId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterByUserId(mixed  <span class="argument">$userId = null</span>, string  <span class="argument">$comparison = null</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Filter the query on the user_id column</em></p>
+                <p>Example usage:
+<code>
+$query-&gt;filterByUserId(1234); // WHERE user_id = 1234
+$query-&gt;filterByUserId(array(12, 34)); // WHERE user_id IN (12, 34)
+$query-&gt;filterByUserId(array('min' =&gt; 12)); // WHERE user_id &gt; 12
+</code></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$userId </td>
+                                <td><p>The value to use as filter.
+Use scalar values for equality.
+Use array values for in_array() equivalent.
+Use associative array('min' =&gt; $minValue, 'max' =&gt; $maxValue) for intervals.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$comparison </td>
+                                <td><p>Operator to use for the column comparison, defaults to Criteria::EQUAL</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="../classes/App.Models.Base.AccountQuery.html#method_filterByUser"><span class="namespace-wrapper">\App\Models\Base\AccountQuery::filterByUser()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterByName" name="method_filterByName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterByName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterByName(string  <span class="argument">$name = null</span>, string  <span class="argument">$comparison = null</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Filter the query on the name column</em></p>
+                <p>Example usage:
+<code>
+$query-&gt;filterByName('fooValue');   // WHERE name = 'fooValue'
+$query-&gt;filterByName('%fooValue%', Criteria::LIKE); // WHERE name LIKE '%fooValue%'
+</code></p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td><p>The value to use as filter.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$comparison </td>
+                                <td><p>Operator to use for the column comparison, defaults to Criteria::EQUAL</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterByUser" name="method_filterByUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterByUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterByUser(\App\Models\User|\Propel\Runtime\Collection\ObjectCollection  <span class="argument">$user</span>, string  <span class="argument">$comparison = null</span>) : \App\Models\AccountQuery</pre>
+                <p><em>Filter the query by a related \App\Models\User object</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/App.Models.User.html">\App\Models\User</a>|\Propel\Runtime\Collection\ObjectCollection</td>
+                                <td>$user </td>
+                                <td><p>The related object(s) to use as filter</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$comparison </td>
+                                <td><p>Operator to use for the column comparison, defaults to Criteria::EQUAL</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\Propel\Runtime\Exception\PropelException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_joinUser" name="method_joinUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">joinUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">joinUser(string  <span class="argument">$relationAlias = null</span>, string  <span class="argument">$joinType = \Propel\Runtime\ActiveQuery\Criteria::INNER_JOIN</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Adds a JOIN clause to the query using the User relation</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$relationAlias </td>
+                                <td><p>optional alias for the relation</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$joinType </td>
+                                <td><p>Accepted values are null, 'left join', 'right join', 'inner join'</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_useUserQuery" name="method_useUserQuery" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">useUserQuery()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">useUserQuery(string  <span class="argument">$relationAlias = null</span>, string  <span class="argument">$joinType = \Propel\Runtime\ActiveQuery\Criteria::INNER_JOIN</span>) : \App\Models\UserQuery</pre>
+                <p><em>Use the User relation User object</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$relationAlias </td>
+                                <td><p>optional alias for the relation,
+to be used as main alias in the secondary query</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$joinType </td>
+                                <td><p>Accepted values are null, 'left join', 'right join', 'inner join'</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.UserQuery.html">\App\Models\UserQuery</a>
+                                            &mdash; <p>A secondary query class using the current class as primary query</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">\App\Models\Base\useQuery()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_filterByTransaction" name="method_filterByTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">filterByTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">filterByTransaction(\App\Models\Transaction|\Propel\Runtime\Collection\ObjectCollection  <span class="argument">$transaction</span>, string  <span class="argument">$comparison = null</span>) : \App\Models\AccountQuery</pre>
+                <p><em>Filter the query by a related \App\Models\Transaction object</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/App.Models.Transaction.html">\App\Models\Transaction</a>|\Propel\Runtime\Collection\ObjectCollection</td>
+                                <td>$transaction </td>
+                                <td><p>the related object to use as filter</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$comparison </td>
+                                <td><p>Operator to use for the column comparison, defaults to Criteria::EQUAL</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_joinTransaction" name="method_joinTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">joinTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">joinTransaction(string  <span class="argument">$relationAlias = null</span>, string  <span class="argument">$joinType = \Propel\Runtime\ActiveQuery\Criteria::INNER_JOIN</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Adds a JOIN clause to the query using the Transaction relation</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$relationAlias </td>
+                                <td><p>optional alias for the relation</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$joinType </td>
+                                <td><p>Accepted values are null, 'left join', 'right join', 'inner join'</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_useTransactionQuery" name="method_useTransactionQuery" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">useTransactionQuery()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">useTransactionQuery(string  <span class="argument">$relationAlias = null</span>, string  <span class="argument">$joinType = \Propel\Runtime\ActiveQuery\Criteria::INNER_JOIN</span>) : \App\Models\TransactionQuery</pre>
+                <p><em>Use the Transaction relation Transaction object</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$relationAlias </td>
+                                <td><p>optional alias for the relation,
+to be used as main alias in the secondary query</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$joinType </td>
+                                <td><p>Accepted values are null, 'left join', 'right join', 'inner join'</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.TransactionQuery.html">\App\Models\TransactionQuery</a>
+                                            &mdash; <p>A secondary query class using the current class as primary query</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">\App\Models\Base\useQuery()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_prune" name="method_prune" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">prune()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">prune(\App\Models\Account  <span class="argument">$account = null</span>) : $this|\App\Models\AccountQuery</pre>
+                <p><em>Exclude object from result</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td><a href="../classes/App.Models.Account.html">\App\Models\Account</a></td>
+                                <td>$account </td>
+                                <td><p>Object to remove from the list of results</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    $this|<a href="../classes/App.Models.AccountQuery.html">\App\Models\AccountQuery</a>
+                                            &mdash; <p>The current query, for fluid interface</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_doDeleteAll" name="method_doDeleteAll" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">doDeleteAll()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">doDeleteAll(\Propel\Runtime\Connection\ConnectionInterface  <span class="argument">$con = null</span>) : integer</pre>
+                <p><em>Deletes all rows from the account table.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Propel\Runtime\Connection\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td><p>the connection to use</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>The number of affected rows (if supported by underlying database driver).</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_delete" name="method_delete" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">delete()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">delete(\Propel\Runtime\Connection\ConnectionInterface  <span class="argument">$con = null</span>) : integer</pre>
+                <p><em>Performs a DELETE on the database based on the current ModelCriteria</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Propel\Runtime\Connection\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td><p>the connection to use</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\Propel\Runtime\Exception\PropelException</dt>
+                            <dd><p>Any exceptions caught during processing will be
+rethrown wrapped into a PropelException.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>The number of affected rows (if supported by underlying database driver).  This includes CASCADE-related rows
+if supported by native driver or if emulated using Propel.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_orderById" name="method_orderById" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">orderById()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">orderById(\=  <span class="argument">$order</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Order by the id column</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$order </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_orderByUserId" name="method_orderByUserId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">orderByUserId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">orderByUserId(\=  <span class="argument">$order</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Order by the user_id column</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$order </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_orderByName" name="method_orderByName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">orderByName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">orderByName(\=  <span class="argument">$order</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Order by the name column</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$order </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_groupById" name="method_groupById" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">groupById()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">groupById() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Group by the id column</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_groupByUserId" name="method_groupByUserId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">groupByUserId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">groupByUserId() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Group by the user_id column</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_groupByName" name="method_groupByName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">groupByName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">groupByName() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Group by the name column</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_leftJoin" name="method_leftJoin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">leftJoin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">leftJoin(mixed  <span class="argument">$relation</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a LEFT JOIN clause to the query</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$relation </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rightJoin" name="method_rightJoin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rightJoin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rightJoin(mixed  <span class="argument">$relation</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a RIGHT JOIN clause to the query</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$relation </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_innerJoin" name="method_innerJoin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">innerJoin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">innerJoin(mixed  <span class="argument">$relation</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a INNER JOIN clause to the query</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$relation </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_leftJoinWith" name="method_leftJoinWith" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">leftJoinWith()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">leftJoinWith(mixed  <span class="argument">$relation</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a LEFT JOIN clause and with to the query</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$relation </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rightJoinWith" name="method_rightJoinWith" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rightJoinWith()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rightJoinWith(mixed  <span class="argument">$relation</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a RIGHT JOIN clause and with to the query</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$relation </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_innerJoinWith" name="method_innerJoinWith" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">innerJoinWith()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">innerJoinWith(mixed  <span class="argument">$relation</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a INNER JOIN clause and with to the query</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$relation </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_leftJoinUser" name="method_leftJoinUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">leftJoinUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">leftJoinUser(\=  <span class="argument">$relationAlias</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a LEFT JOIN clause to the query using the User relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$relationAlias </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rightJoinUser" name="method_rightJoinUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rightJoinUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rightJoinUser(\=  <span class="argument">$relationAlias</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a RIGHT JOIN clause to the query using the User relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$relationAlias </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_innerJoinUser" name="method_innerJoinUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">innerJoinUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">innerJoinUser(\=  <span class="argument">$relationAlias</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a INNER JOIN clause to the query using the User relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$relationAlias </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_joinWithUser" name="method_joinWithUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">joinWithUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">joinWithUser(\=  <span class="argument">$joinType</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a join clause and with to the query using the User relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$joinType </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_leftJoinWithUser" name="method_leftJoinWithUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">leftJoinWithUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">leftJoinWithUser() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a LEFT JOIN clause and with to the query using the User relation</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rightJoinWithUser" name="method_rightJoinWithUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rightJoinWithUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rightJoinWithUser() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a RIGHT JOIN clause and with to the query using the User relation</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_innerJoinWithUser" name="method_innerJoinWithUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">innerJoinWithUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">innerJoinWithUser() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a INNER JOIN clause and with to the query using the User relation</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_leftJoinTransaction" name="method_leftJoinTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">leftJoinTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">leftJoinTransaction(\=  <span class="argument">$relationAlias</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a LEFT JOIN clause to the query using the Transaction relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$relationAlias </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rightJoinTransaction" name="method_rightJoinTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rightJoinTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rightJoinTransaction(\=  <span class="argument">$relationAlias</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a RIGHT JOIN clause to the query using the Transaction relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$relationAlias </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_innerJoinTransaction" name="method_innerJoinTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">innerJoinTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">innerJoinTransaction(\=  <span class="argument">$relationAlias</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a INNER JOIN clause to the query using the Transaction relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$relationAlias </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_joinWithTransaction" name="method_joinWithTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">joinWithTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">joinWithTransaction(\=  <span class="argument">$joinType</span>) : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a join clause and with to the query using the Transaction relation</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\=</td>
+                                <td>$joinType </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_leftJoinWithTransaction" name="method_leftJoinWithTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">leftJoinWithTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">leftJoinWithTransaction() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a LEFT JOIN clause and with to the query using the Transaction relation</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_rightJoinWithTransaction" name="method_rightJoinWithTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">rightJoinWithTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">rightJoinWithTransaction() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a RIGHT JOIN clause and with to the query using the Transaction relation</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_innerJoinWithTransaction" name="method_innerJoinWithTransaction" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">innerJoinWithTransaction()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">innerJoinWithTransaction() : \App\Models\AccountQuery</pre>
+                <p><em></em></p>
+                <p>Adds a INNER JOIN clause and with to the query using the Transaction relation</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\AccountQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_endUse" name="method_endUse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">endUse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">endUse() : \App\Models\UserQuery|\App\Models\TransactionQuery</pre>
+                <p><em></em></p>
+                <p>Finalizes a secondary criteria and merges it with its primary Criteria</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\UserQuery|\App\Models\TransactionQuery
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findOne" name="method_findOne" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findOne()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findOne(\ConnectionInterface  <span class="argument">$con = null</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount matching the query</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findOneOrCreate" name="method_findOneOrCreate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findOneOrCreate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findOneOrCreate(\ConnectionInterface  <span class="argument">$con = null</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount matching the query, or a new ChildAccount object populated from the query conditions when no match is found</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findOneById" name="method_findOneById" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findOneById()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findOneById(integer  <span class="argument">$id</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount filtered by the id column</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$id </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findOneByUserId" name="method_findOneByUserId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findOneByUserId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findOneByUserId(integer  <span class="argument">$user_id</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount filtered by the user_id column</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$user_id </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findOneByName" name="method_findOneByName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findOneByName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findOneByName(string  <span class="argument">$name</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount filtered by the name column *</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_requirePk" name="method_requirePk" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">requirePk()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">requirePk(mixed  <span class="argument">$key</span>, \ConnectionInterface  <span class="argument">$con = null</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the ChildAccount by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td></td>
+                            </tr>
+                                                    <tr>
+                                <td>\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_requireOne" name="method_requireOne" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">requireOne()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">requireOne(\ConnectionInterface  <span class="argument">$con = null</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_requireOneById" name="method_requireOneById" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">requireOneById()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">requireOneById(integer  <span class="argument">$id</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount filtered by the id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$id </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_requireOneByUserId" name="method_requireOneByUserId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">requireOneByUserId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">requireOneByUserId(integer  <span class="argument">$user_id</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount filtered by the user_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$user_id </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_requireOneByName" name="method_requireOneByName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">requireOneByName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">requireOneByName(string  <span class="argument">$name</span>) : \App\Models\Account</pre>
+                <p><em></em></p>
+                <p>Return the first ChildAccount filtered by the name column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$name </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \App\Models\Account
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_" name="method_" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">() : </pre>
+                <p><em></em></p>
+                <p>ChildAccount[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildAccount objects based on current ModelCriteria</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_" name="method_" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">() : </pre>
+                <p><em></em></p>
+                <p>ChildAccount[]|ObjectCollection findById(int $id) Return ChildAccount objects filtered by the id column</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_" name="method_" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">() : </pre>
+                <p><em></em></p>
+                <p>ChildAccount[]|ObjectCollection findByUserId(int $user_id) Return ChildAccount objects filtered by the user_id column</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_" name="method_" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">() : </pre>
+                <p><em></em></p>
+                <p>ChildAccount[]|ObjectCollection findByName(string $name) Return ChildAccount objects filtered by the name column</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_" name="method_" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">() : </pre>
+                <p><em></em></p>
+                <p>ChildAccount[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit</p>
+
+                
+                
+                                    <h4>Returns</h4>
+                    
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findPkSimple" name="method_findPkSimple" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">findPkSimple()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findPkSimple(mixed  <span class="argument">$key</span>, \Propel\Runtime\Connection\ConnectionInterface  <span class="argument">$con</span>) : \App\Models\Account</pre>
+                <p><em>Find object by primary key using raw SQL to go fast.</em></p>
+                <p>Bypass doSelect() and the object formatter by using generated code.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td><p>Primary key to use for the query</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Propel\Runtime\Connection\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td><p>A connection object</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\Propel\Runtime\Exception\PropelException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.Account.html">\App\Models\Account</a>
+                                            &mdash; <p>A model object, or null if the key is not found</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findPkComplex" name="method_findPkComplex" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">findPkComplex()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findPkComplex(mixed  <span class="argument">$key</span>, \Propel\Runtime\Connection\ConnectionInterface  <span class="argument">$con</span>) : \App\Models\Account|array|mixed</pre>
+                <p><em>Find object by primary key.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$key </td>
+                                <td><p>Primary key to use for the query</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Propel\Runtime\Connection\ConnectionInterface</td>
+                                <td>$con </td>
+                                <td><p>A connection object</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    <a href="../classes/App.Models.Account.html">\App\Models\Account</a>|array|mixed
+                                            &mdash; <p>the result, formatted by the current formatter</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">AccountQuery.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/App/Models/Base/AccountQuery.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/App.html">\App</a></li>
+                                                                            <li><a href="../namespaces/Core.html">\Core</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on November 5th, 2018 at 00:40.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

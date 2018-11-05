@@ -5,16 +5,28 @@ namespace Core;
 use App\Services\Authentication;
 use Josantonius\Session\Session;
 
-
+/**
+ * Class App
+ * @package Core
+ */
 class App
 {
 
-
+    /**
+     * Constante con el namespace de los controladores
+     */
     const NAMESPACE_CONTROLLERS = "\App\Controllers\\";
 
-
+    /**
+     * Directorio con los controladores
+     */
     const DIRECTORY_CONTROLLERS = ROOT . "App" . DS . "Controllers" . DS;
 
+    /**
+     * Método que ejecuta la aplicación y recibe una Request
+     * @param Request $request
+     * @throws \Exception
+     */
     public static function run(Request $request)
     {
         Session::init();

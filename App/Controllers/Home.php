@@ -12,13 +12,24 @@ use Core\View;
 use Josantonius\Session\Session;
 use Propel\Runtime\Exception\PropelException;
 
+/**
+ * Class Home
+ * @package App\Controllers
+ */
 class Home extends Controller
 {
+    /**
+     * Home constructor.
+     * @param string $extensionTemplate
+     */
     public function __construct(string $extensionTemplate = "php")
     {
         parent::__construct($extensionTemplate);
     }
 
+    /**
+     * Método Home de la aplicación
+     */
     public function index(): void
     {
         if (Authentication::isLogged()){
@@ -30,7 +41,9 @@ class Home extends Controller
         }
     }
 
-    // TODO: Validación de los datos
+    /**
+     * Método para el inicio de sesión
+     */
     public function login(): void
     {
         if ($_GET){
@@ -57,6 +70,10 @@ class Home extends Controller
             }
         }
     }
+
+    /**
+     *
+     */
     public function logOut():void{
         if ($_GET && Authentication::logOut()){
             Session::set("action", "Se ha cerrado la sesión");
@@ -67,7 +84,9 @@ class Home extends Controller
         }
     }
 
-    // TODO: Validación de los datos
+    /**
+     * Método para Registrarse en la aplicación
+     */
     public function signup():void
     {
         if (Authentication::isLogged()){

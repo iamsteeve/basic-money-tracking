@@ -2,16 +2,34 @@
 
 namespace Core;
 
-
+/**
+ * Class Request
+ * @package Core
+ */
 class Request
 {
 
+    /**
+     * Propiedad con el controlador de la solicitud
+     * @var string
+     */
     private $_controller;
 
+    /**
+     * Propiedad con el método de la solicitud
+     * @var string
+     */
     private $_method;
 
+    /**
+     * Propiedad con los argumentos de la solicitud
+     * @var array
+     */
     private $_args;
 
+    /**
+     * Request constructor.
+     */
     public function __construct()
     {
         $url = $this->parseUrl();
@@ -24,6 +42,9 @@ class Request
     }
 
 
+    /**
+     * Método para verificar la URL
+     */
     private function verifyUrl(): void
     {
         if (!$this->_controller) {
@@ -38,6 +59,10 @@ class Request
     }
 
 
+    /**
+     * Método para parsear la url y dividirlo en un array
+     * @return array
+     */
     private function parseUrl(): array
     {
         if (isset($_GET['url'])) {
@@ -48,16 +73,28 @@ class Request
     }
 
 
+    /**
+     * Método get de controladores
+     * @return string
+     */
     public function getController(): string
     {
         return $this->_controller;
     }
 
+    /**
+     * Método get de Métodos
+     * @return string
+     */
     public function getMethod(): string
     {
         return $this->_method;
     }
 
+    /**
+     * Método get de argumentos
+     * @return array
+     */
     public function getArgs(): array
     {
         return $this->_args;

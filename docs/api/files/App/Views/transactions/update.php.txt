@@ -1,0 +1,64 @@
+<?php $this->layout('layouts::structure', ['title' => $title ]) ?>
+
+<div class="container">
+    <div class="row">
+        <h2>Actualiza la transacción</h2>
+        <div class="row">
+            <form class="col s12 " action="<?php echo APP_URL?>transactions/update/<?= $this->e($transaction->getId()) ?>" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select name="account_id" >
+                            <option disabled selected>Elegir Una Cuenta</option>
+                            <?php foreach ($accounts as $account):?>
+                                <?= $account->getId() === $transaction->getAccountId()? '<option value='.$transaction->getAccountId().' selected>'.$account->getName(). '</option>': '<option value='.$transaction->getAccountId().'>'.$account->getName(). '</option>'   ?>
+
+                            <?php  endforeach?>
+                        </select>
+                        <label >Cuenta</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <select name="category_id" >
+                            <option disabled selected>Elegir Una categoría</option>
+                            <?php foreach ($categories as $category):?>
+                                <?= $category->getId() === $transaction->getCategoryId()? '<option value='.$transaction->getCategoryId().' selected>'.$category->getName(). '</option>': '<option value='.$transaction->getCategoryId().'>'.$category->getName(). '</option>'   ?>
+
+                            <?php  endforeach?>
+                        </select>
+                        <label >Categoría</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input class="validate" id="description" name="description" type="text" value="<?= $this->e($transaction->getDescription()) ?>" required/>
+                        <label for="description">Descripción</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input step="any" class="validate" id="amount" name="amount" type="number" value="<?= $this->e($transaction->getAmount()) ?>" required/>
+                        <label for="amount">Monto</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <label>Fecha</label>
+                        <input class="datepicker"  type="text" name="date" value="<?= $transaction->getDate('Y-m-d') ?>"/>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Guardar
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

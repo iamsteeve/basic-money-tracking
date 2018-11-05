@@ -13,14 +13,25 @@ use Josantonius\Session\Session;
 use Propel\Runtime\Exception\PropelException;
 use Valitron\Validator;
 
+/**
+ * Class Accounts
+ * @package App\Controllers
+ */
 class Accounts extends Controller
 {
 
+    /**
+     * Accounts constructor.
+     * @param string $extensionTemplate
+     */
     public function __construct(string $extensionTemplate = "php")
     {
         parent::__construct($extensionTemplate);
     }
 
+    /**
+     * Punto de encuentro del controlador Cuentas
+     */
     public function index(): void
     {
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
@@ -41,6 +52,9 @@ class Accounts extends Controller
 
     }
 
+    /**
+     * Método para añadir Cuentas
+     */
     public function add(): void
     {
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
@@ -75,6 +89,11 @@ class Accounts extends Controller
             $this->toLogin();
         }
     }
+
+    /**
+     * Método para actualizar Cuentas
+     * @param $id
+     */
     public function update($id): void
     {
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
@@ -121,6 +140,10 @@ class Accounts extends Controller
 
     }
 
+    /**
+     * Método para borrar Cuentas
+     * @param $id
+     */
     public function delete($id): void
     {
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){

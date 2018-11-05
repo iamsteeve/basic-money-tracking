@@ -1,0 +1,138 @@
+<?php
+
+namespace App\Controllers;
+
+
+use App\Models\User;
+use App\Models\UserQuery;
+use App\Services\Authentication;
+use App\Services\Sanatize;
+use Core\Controller;
+use Core\View;
+use Josantonius\Session\Session;
+use Propel\Runtime\Exception\PropelException;
+
+/**
+ * Class Home
+ * @package App\Controllers
+ */
+class Home extends Controller
+{
+    /**
+     * Home constructor.
+     * @param string $extensionTemplate
+     */
+    public function __construct(string $extensionTemplate = "php")
+    {
+        parent::__construct($extensionTemplate);
+    }
+
+    /**
+     * Método Home de la aplicación
+     */
+    public function index(): void
+    {
+        if (Authentication::isLogged()){
+            $this->toDefaultController();
+        } else {
+            View::setData("title","MoneyTracking");
+            View::sendActionSessionToView();
+            View::render("index");
+        }
+    }
+
+    /**
+     * Método para el inicio de sesión
+     */
+    public function login(): void
+    {
+        if ($_GET){
+            if (Authentication::isLogged()){
+                $this->toDefaultController();
+            } else {
+                View::setData("title", "Inicia sesión");
+                View::sendActionSessionToView();
+                View::render("login");
+            }
+        }
+        if ($_POST){
+            $user = UserQuery::create()
+                ->filterByEmail(Sanatize::isEmail($_POST['email']))
+                ->filterByPassword($_POST['password'])
+                ->findOne();
+            if ($user && Authentication::signIn($user->getDisplayname(),$user->getId(),$user->getRol(), $user->getEmail())){
+                Session::set("action", "¡Se iniciado sesión!");
+                $this->toDefaultController();
+            } else {
+                Session::set("action", "Ha fallado el inicio de sesión compruebe sus datos");
+                $this->redirect(array("controller"=>"home", "action" =>"login"));
+                exit();
+            }
+        }
+    }
+
+    /**
+     *
+     */
+    public function logOut():void{
+        if ($_GET && Authentication::logOut()){
+            Session::set("action", "Se ha cerrado la sesión");
+            $this->toLogin();
+        } else {
+            Session::set("action", "No se ha podido cerrar la sesión");
+            $this->toMain();
+        }
+    }
+
+    /**
+     * Método para Registrarse en la aplicación
+     */
+    public function signup():void
+    {
+        if (Authentication::isLogged()){
+            $this->toDefaultController();
+        } else {
+            if ($_GET){
+                View::setData("title", "Regístrate en MoneyTracking");
+                View::sendActionSessionToView();
+                View::render("signup");
+            }
+            if ($_POST){
+
+                    $user = UserQuery::create()
+                        ->filterByEmail($_POST['email'])
+                        ->findOne();
+                    if ($user){
+                        Session::set('action','Ya se encuentra registrado en el sistema');
+                        $this->redirect(array("controller"=>"home", "action" => "signup"));
+                        exit();
+                    } else {
+                        try {
+                            $newUser = new User();
+                            $newUser->setId(null);
+                            $newUser->setPassword($_POST['password']);
+                            $newUser->setEmail(Sanatize::isEmail($_POST['email']));
+                            $newUser->setDisplayname(Sanatize::sanitizeText($_POST['displayname']));
+                            $newUser->setRol('user');
+                            $newUser->setName(Sanatize::sanitizeText($_POST['name']));
+                            $newUser->save();
+                            if (Authentication::signIn($newUser->getDisplayname() ? $newUser->getDisplayname() : $newUser->getEmail(), $newUser->getId(), $newUser->getRol(), $newUser->getEmail())) {
+                                Session::set('action', 'Se ha iniciado sesión con éxito');
+                                $this->toDefaultController();
+                            } else {
+                                Session::set('action', 'No se ha podido iniciar sesión pero ya está registrado, ingrese nuevamente');
+                                $this->toLogin();
+                            }
+                        } catch (PropelException $exception){
+                            Session::set('action','Ha sucedido un error al registrarlo');
+                            $this->redirect(array("controller"=>"home", "action" => "signup"));
+                            exit();
+                        }
+                    }
+
+            }
+
+        }
+    }
+
+}

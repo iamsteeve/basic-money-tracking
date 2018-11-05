@@ -8,21 +8,44 @@ use League\Plates\Engine;
 
 class View
 {
-    private static $_data = array();
     /**
+     * Propiedad con la información de la template
+     * @var array
+     */
+    private static $_data = array();
+
+    /**
+     * Propiedad con el motor de plantillas
      * @var Engine
      */
     private static $_templates;
+
+    /**
+     * Propiedad con el Controlador
+     * @var string
+     */
     private static $_controller;
 
+    /**
+     * Evita la creación del objeto View
+     * View constructor.
+     */
     private function __construct()
     {
     }
 
+    /**
+     * Evita clonar el objeto
+     */
     private function __clone()
     {
     }
 
+    /**
+     * Permite crear la template esto es ejecutado por el controlador
+     * @param Request $request
+     * @param string $extensionTemplate
+     */
     static public function createEngineOfTemplates(Request $request, $extensionTemplate = "php"): void
     {
         self::$_controller = $request->getController();
@@ -35,6 +58,13 @@ class View
 
     }
 
+    /**
+     * Método para renderizar una template de Error
+     * @param string $title
+     * @param string $errorMessage
+     * @param string $extensionTemplate
+     * @return string
+     */
     static public function renderErrorController(string $title = "error", string $errorMessage = "Ha sucedido un error", string $extensionTemplate = "php"): string
     {
         $layoutPath = VIEWS_FOLDER . "layouts" . DS . DEFAULT_LAYOUT;
@@ -51,11 +81,18 @@ class View
         }
     }
 
+    /**
+     * Método para agregar una extensión para la template
+     * @param $extension
+     */
     static public function loadExtension($extension): void
     {
         self::$_templates->loadExtension($extension);
     }
 
+    /**
+     * Método para enviar un action y algunas variables de sesión a la vista
+     */
     static public function sendActionSessionToView(): void
     {
         if (Session::get('action')) {
@@ -70,11 +107,20 @@ class View
 
     }
 
+    /**
+     * Método para enviar datos a la template como una variable
+     * @param string $name
+     * @param $value
+     */
     static public function setData(string $name, $value): void
     {
         self::$_data[$name] = $value;
     }
 
+    /**
+     * Método para Renderizar una template
+     * @param string $view
+     */
     static public function render(string $view): void
     {
         $renderString = self::$_controller . "::" . $view;

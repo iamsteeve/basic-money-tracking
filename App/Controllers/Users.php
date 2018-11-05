@@ -12,13 +12,24 @@ use Core\View;
 use Josantonius\Session\Session;
 use Propel\Runtime\Exception\PropelException;
 
+/**
+ * Class Users
+ * @package App\Controllers
+ */
 class Users extends Controller
 {
+    /**
+     * Users constructor.
+     * @param string $extensionTemplate
+     */
     public function __construct(string $extensionTemplate = "php")
     {
         parent::__construct($extensionTemplate);
     }
 
+    /**
+     * Método principal para el controlador de usuarios
+     */
     public function index(): void
     {
         if (Authentication::isLogged() && Authentication::checkUniqueRole("admin")){
@@ -37,6 +48,9 @@ class Users extends Controller
         }
     }
 
+    /**
+     * Método para agregar Usuarios
+     */
     public function add(): void
     {
         if (Authentication::isLogged() && Authentication::checkUniqueRole("admin")){
@@ -68,6 +82,10 @@ class Users extends Controller
         }
     }
 
+    /**
+     * Método para actualizar Usuarios
+     * @param $id
+     */
     public function update($id): void
     {
 
@@ -104,6 +122,10 @@ class Users extends Controller
 
     }
 
+    /**
+     * Método para borrar Usuarios
+     * @param $id
+     */
     public function delete($id): void
     {
         if (Authentication::isLogged() && Authentication::checkUniqueRole("admin")){

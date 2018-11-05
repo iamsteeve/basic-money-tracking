@@ -15,14 +15,25 @@ use Core\View;
 use Josantonius\Session\Session;
 use Propel\Runtime\Exception\PropelException;
 
+/**
+ * Class Transactions
+ * @package App\Controllers
+ */
 class Transactions extends Controller
 {
+    /**
+     * Transactions constructor.
+     * @param string $extensionTemplate
+     */
     public function __construct(string $extensionTemplate = "php")
     {
         parent::__construct($extensionTemplate);
         View::loadExtension(new TransactionsExtension());
     }
 
+    /**
+     * Método principal del controlador de transacciones
+     */
     public function index(): void
     {
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
@@ -66,7 +77,9 @@ class Transactions extends Controller
         }
     }
 
-
+    /**
+     * Método para agregar una transacción
+     */
     public function add(): void
     {
         if (Authentication::isLogged() && Authentication::checkUniqueRole("user")|| Authentication::checkUniqueRole("admin")){
@@ -105,6 +118,11 @@ class Transactions extends Controller
             $this->toLogin();
         }
     }
+
+    /**
+     * Método para actualizar transacción
+     * @param $id
+     */
     public function update($id): void
     {
         if (Authentication::isLogged() && Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin")){
@@ -146,6 +164,10 @@ class Transactions extends Controller
         }
     }
 
+    /**
+     * Método para borrar una transacción
+     * @param $id
+     */
     public function delete($id): void
     {
         if (Authentication::isLogged() && Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin")){

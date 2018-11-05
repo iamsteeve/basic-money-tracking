@@ -13,14 +13,24 @@ use Josantonius\Session\Session;
 use Propel\Runtime\Exception\PropelException;
 use Valitron\Validator;
 
+/**
+ * Class Categories
+ * @package App\Controllers
+ */
 class Categories extends Controller
 {
+    /**
+     * Categories constructor.
+     * @param string $extensionTemplate
+     */
     public function __construct(string $extensionTemplate = "php")
     {
         parent::__construct($extensionTemplate);
     }
 
-
+    /**
+     * Método principal de categorías
+     */
     public function index(): void
     {
         if(Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
@@ -42,6 +52,9 @@ class Categories extends Controller
 
     }
 
+    /**
+     * Método para agregar Categorías
+     */
     public function add(): void
     {
 
@@ -82,6 +95,10 @@ class Categories extends Controller
 
     }
 
+    /**
+     * Método para actualizar categorías
+     * @param $id
+     */
     public function update($id): void
     {
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){
@@ -127,6 +144,10 @@ class Categories extends Controller
 
     }
 
+    /**
+     * Método para eliminar Categorías
+     * @param $id
+     */
     public function delete($id): void
     {
         if (Authentication::isLogged() && (Authentication::checkUniqueRole("user") || Authentication::checkUniqueRole("admin"))){

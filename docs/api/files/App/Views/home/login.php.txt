@@ -1,0 +1,35 @@
+<?php $this->layout('layouts::structure', ['title' => $title]) ?>
+
+<div class="container">
+    <div class="row">
+        <h2 class="center-align p2">Inicia sesión y empieza a gestionar tus transacciones</h2>
+        <div class="row">
+            <form class="col s12 " action="<?php echo APP_URL?>home/login" method="post">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">email</i>
+                        <input class="validate" id="email" name="email" type="email" required/>
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">lock_open</i>
+                        <input class="validate" id="password" name="password" type="password" required/>
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="input-field col s12 center-align">
+                        <button class="btn waves-effect waves-light btn-large" type="submit" name="action">Iniciar sesión
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
