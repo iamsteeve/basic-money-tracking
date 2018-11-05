@@ -10,7 +10,7 @@
                         <select name="account_id" >
                             <option disabled selected>Elegir Una Cuenta</option>
                             <?php foreach ($accounts as $account):?>
-                                <?= $account->getId() === $transaction->getAccountId()? '<option value='.$transaction->getAccountId().' selected>'.$account->getName(). '</option>': '<option value='.$transaction->getAccountId().'>'.$account->getName(). '</option>'   ?>
+                                <?= $account->getId() === $transaction->getAccountId()? '<option value="'.$account->getId().'" selected>'.$account->getName(). '</option>': '<option value='.$account->getId().'>'.$account->getName(). '</option>'   ?>
 
                             <?php  endforeach?>
                         </select>
@@ -22,7 +22,7 @@
                         <select name="category_id" >
                             <option disabled selected>Elegir Una categoría</option>
                             <?php foreach ($categories as $category):?>
-                                <?= $category->getId() === $transaction->getCategoryId()? '<option value='.$transaction->getCategoryId().' selected>'.$category->getName(). '</option>': '<option value='.$transaction->getCategoryId().'>'.$category->getName(). '</option>'   ?>
+                                <?= $category->getId() === $transaction->getCategoryId()? '<option value="'.$category->getId().'" selected>'.$category->getName(). '</option>': '<option value='.$category->getId().'>'.$category->getName(). '</option>'   ?>
 
                             <?php  endforeach?>
                         </select>
